@@ -7,7 +7,7 @@ class Entry extends Component {
 
       this.state = {
           user: {},
-          value: ''
+          name: ''
       }
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,9 +21,9 @@ class Entry extends Component {
             <form onSubmit={this.handleSubmit}>
               <label>
                   Name:
-                 <input type="text" value={this.state.value} onChange={this.handleChange} />
+                 <input type="text" name={this.state.name} onChange={this.handleChange} />
                </label>
-             <input type="submit" value="Submit" />
+             <input type="submit" name="Submit" />
              </form>
              <p>Name of user: {this.state.user.firstName}</p>
            </div>
@@ -31,11 +31,11 @@ class Entry extends Component {
 
   handleChange(event) {
     console.log('Handling change');
-    this.setState({value: event.target.value});
+    this.setState({name: event.target.name});
   }
 
   handleSubmit(event) {
-    console.log('A name was submitted: ' + this.state.value);
+    console.log('A name was submitted: ' + this.state.name);
     event.preventDefault();
     fetch('http://localhost:8080/users', {
       method: 'POST',
@@ -44,7 +44,7 @@ class Entry extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        firstName: this.state.value
+        firstName: this.state.name
       })
     })
   }
