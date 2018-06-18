@@ -6,8 +6,11 @@ class Entry extends Component {
       super(props);
 
       this.state = {
-          user: {}
+          user: {},
+          value: ''
       }
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   render() {
@@ -15,13 +18,25 @@ class Entry extends Component {
       return <p>Loading...</p>
     }
     return <div>
-             <button onClick={this.onAdd}>Add</button>
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                  Name:
+                 <input type="text" value={this.state.value} onChange={this.handleChange} />
+               </label>
+             <input type="submit" value="Submit" />
+             </form>
              <p>Name of user: {this.state.user.firstName}</p>
            </div>
   }
 
-  onAdd() {
-    console.log('add stuff');
+  handleChange(event) {
+    console.log('Handling change');
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    console.log('A name was submitted: ' + this.state.value);
+    event.preventDefault();
     fetch('http://localhost:8080/users', {
       method: 'POST',
       headers: {
@@ -29,10 +44,9 @@ class Entry extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        firstName: 'Yolga'
+        firstName: this.state.value
       })
     })
-    // TODO: Implement
   }
 
   componentDidMount() {
