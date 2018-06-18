@@ -7,9 +7,11 @@ class Entry extends Component {
 
       this.state = {
           user: {},
-          name: ''
+          name: '',
+          info: ''
       }
       this.handleNameChange = this.handleNameChange.bind(this);
+      this.handleInfoChange = this.handleInfoChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -22,16 +24,27 @@ class Entry extends Component {
               <label>
                   Name:
                  <input type="text" value={this.state.name} onChange={this.handleNameChange} />
-               </label>
-             <input type="submit" value="Submit" />
+              </label>
+              <br/>
+              <label>
+                  Info:
+                 <input type="text" value={this.state.info} onChange={this.handleInfoChange} />
+              </label>
+              <br/>
+              <input type="submit" value="Submit" />
              </form>
              <p>Name of user: {this.state.user.firstName}</p>
            </div>
   }
 
   handleNameChange(event) {
-    console.log('Handling change');
+    console.log('Handling name change: ' + event.target.value);
     this.setState({name: event.target.value});
+  }
+
+  handleInfoChange(event) {
+    console.log('Handling info change: ' + event.target.value);
+    this.setState({info: event.target.value});
   }
 
   handleSubmit(event) {
@@ -44,7 +57,8 @@ class Entry extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        firstName: this.state.name
+        firstName: this.state.name,
+        info: this.state.info
       })
     })
   }
