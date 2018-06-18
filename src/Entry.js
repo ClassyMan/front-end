@@ -54,7 +54,7 @@ class Entry extends Component {
 
   handleSubmit(event) {
     console.log('A name was submitted: ' + this.state.name);
-    event.preventDefault();
+
     fetch('http://localhost:8080/users', {
       method: 'POST',
       headers: {
