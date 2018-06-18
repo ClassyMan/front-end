@@ -21,9 +21,9 @@ class Entry extends Component {
             <form onSubmit={this.handleSubmit}>
               <label>
                   Name:
-                 <input type="text" name={this.state.name} onChange={this.handleChange} />
+                 <input type="text" value={this.state.name} onChange={this.handleChange} />
                </label>
-             <input type="submit" name="Submit" />
+             <input type="submit" value="Submit" />
              </form>
              <p>Name of user: {this.state.user.firstName}</p>
            </div>
@@ -31,7 +31,7 @@ class Entry extends Component {
 
   handleChange(event) {
     console.log('Handling change');
-    this.setState({name: event.target.name});
+    this.setState({name: event.target.value});
   }
 
   handleSubmit(event) {
