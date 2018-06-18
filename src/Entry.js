@@ -13,6 +13,7 @@ class Entry extends Component {
       this.handleNameChange = this.handleNameChange.bind(this);
       this.handleInfoChange = this.handleInfoChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleDeleteUser = this.handleDeleteUser.bind(this);
   }
 
   render() {
@@ -37,9 +38,14 @@ class Entry extends Component {
                                            <dt>{userInstance.firstName}</dt>
                                            <dd>{userInstance.info}</dd>
                                            <hr></hr>
+                                           <button value={userInstance.id} onClick={this.handleDeleteUser}>Delete</button>
                                          </div>})
                                 }
            </div>
+  }
+
+  handleDeleteUser(userId) {
+    console.log('delete user with id: ' + userId.target.value);
   }
 
   handleNameChange(event) {
