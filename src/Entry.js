@@ -6,7 +6,7 @@ class Entry extends Component {
       super(props);
 
       this.state = {
-          user: {},
+          user: [],
           name: '',
           info: ''
       }
@@ -16,9 +16,6 @@ class Entry extends Component {
   }
 
   render() {
-    if (!this.state.user.firstName) {
-      return <p>Loading...</p>
-    }
     return <div>
             <form onSubmit={this.handleSubmit}>
               <label>
@@ -33,7 +30,15 @@ class Entry extends Component {
               <br/>
               <input type="submit" value="Submit" />
              </form>
-             <p>Name of user: {this.state.user.firstName}</p>
+             <p>Users:</p>
+             {this.state.user.map(userInstance =>
+                                {
+                                  return <div key={userInstance.id}>
+                                           <dt>{userInstance.firstName}</dt>
+                                           <dd>{userInstance.info}</dd>
+                                           <hr></hr>
+                                         </div>})
+                                }
            </div>
   }
 
@@ -69,7 +74,7 @@ class Entry extends Component {
 
   getUserByFirstName(name) {
     console.log('attempting to call back end');
-    return fetch('http://localhost:8080/fetchUser?name=Olga')
+    return fetch('http://localhost:8080/listAll')
       .then((res) => {
          console.log('response received');
          var text = res.text();
