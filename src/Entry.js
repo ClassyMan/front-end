@@ -9,7 +9,7 @@ class Entry extends Component {
           user: {},
           name: ''
       }
-      this.handleChange = this.handleChange.bind(this);
+      this.handleNameChange = this.handleNameChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -21,7 +21,7 @@ class Entry extends Component {
             <form onSubmit={this.handleSubmit}>
               <label>
                   Name:
-                 <input type="text" value={this.state.name} onChange={this.handleChange} />
+                 <input type="text" value={this.state.name} onChange={this.handleNameChange} />
                </label>
              <input type="submit" value="Submit" />
              </form>
@@ -29,7 +29,7 @@ class Entry extends Component {
            </div>
   }
 
-  handleChange(event) {
+  handleNameChange(event) {
     console.log('Handling change');
     this.setState({name: event.target.value});
   }
