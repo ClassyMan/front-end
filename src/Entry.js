@@ -15,8 +15,14 @@ class Entry extends Component {
       return <p>Loading...</p>
     }
     return <div>
+             <button onClick={this.onAdd}>Add</button>
              <p>Name of user: {this.state.user.firstName}</p>
            </div>
+  }
+
+  onAdd() {
+    console.log('add stuff');
+    // TODO: Implement
   }
 
   componentDidMount() {
