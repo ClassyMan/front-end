@@ -37,8 +37,8 @@ class Entry extends Component {
                                   return <div key={userInstance.id}>
                                            <dt>{userInstance.firstName}</dt>
                                            <dd>{userInstance.info}</dd>
-                                           <hr></hr>
                                            <button value={userInstance.id} onClick={this.handleDeleteUser}>Delete</button>
+                                           <hr></hr>
                                          </div>})
                                 }
            </div>
