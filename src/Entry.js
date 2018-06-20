@@ -6,7 +6,7 @@ class Entry extends Component {
       super(props);
 
       this.state = {
-          user: [],
+          users: [],
           name: '',
           info: ''
       }
@@ -32,7 +32,7 @@ class Entry extends Component {
               <input type="submit" value="Submit" />
              </form>
              <p>Users:</p>
-             {this.state.user.map(userInstance =>
+             {this.state.users.map(userInstance =>
                                 {
                                   return <div key={userInstance.id}>
                                            <dt>{userInstance.firstName}</dt>
@@ -107,7 +107,7 @@ class Entry extends Component {
     .then((text) => {
        console.log('parsing json: ' + text);
        var retreived = text.length ? JSON.parse(text) : {};
-       this.setState({user: retreived})
+       this.setState({users: retreived})
     });
   }
 }
