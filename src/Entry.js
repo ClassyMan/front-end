@@ -53,7 +53,9 @@ class Entry extends Component {
         'Content-Type': 'application/json',
       },
       body: userId.target.value
-    })
+    }).then((res) => {
+      this.loadAllUsers();
+    });
   }
 
   handleNameChange(event) {
@@ -79,7 +81,7 @@ class Entry extends Component {
         firstName: this.state.name,
         info: this.state.info
       })
-    })
+    });
   }
 
   componentDidMount() {
