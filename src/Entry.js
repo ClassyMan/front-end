@@ -45,7 +45,15 @@ class Entry extends Component {
   }
 
   handleDeleteUser(userId) {
-    console.log('delete user with id: ' + userId.target.value);
+    console.log('attempting to delete user with id: ' + userId.target.value);
+    fetch('http://localhost:8080/deletion/', {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: userId.target.value
+    })
   }
 
   handleNameChange(event) {
@@ -75,10 +83,10 @@ class Entry extends Component {
   }
 
   componentDidMount() {
-    this.getUserByFirstName('Olga')
+    this.loadAllUsers()
   }
 
-  getUserByFirstName(name) {
+  loadAllUsers() {
     console.log('attempting to call back end');
     return fetch('http://localhost:8080/listAll', {
         headers: {
