@@ -80,18 +80,25 @@ class Entry extends Component {
 
   getUserByFirstName(name) {
     console.log('attempting to call back end');
-    return fetch('http://localhost:8080/listAll')
-      .then((res) => {
-         console.log('response received');
-         var text = res.text();
-         console.log('result: ' + text);
-         return text;
-      })
-    	.then((text) => {
-         console.log('parsing json: ' + text);
-         var retreived = text.length ? JSON.parse(text) : {};
-         this.setState({user: retreived})
-      });
+    return fetch('http://localhost:8080/listAll', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json', // explicitly set the content-type
+          // spring is funny about this for some reason
+        }
+      }
+    )
+    .then((res) => {
+       console.log('response received');
+       var text = res.text();
+       console.log('result: ' + text);
+       return text;
+    })
+    .then((text) => {
+       console.log('parsing json: ' + text);
+       var retreived = text.length ? JSON.parse(text) : {};
+       this.setState({user: retreived})
+    });
   }
 }
 
