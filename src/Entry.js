@@ -61,7 +61,7 @@ class Entry extends Component {
   handleSubmit(event) {
     console.log('A name was submitted: ' + this.state.name);
 
-    fetch('http://localhost:8080/users', {
+    fetch('http://localhost:8080/add', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
