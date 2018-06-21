@@ -7,7 +7,7 @@ class Entry extends Component {
 
       this.state = {
           users: [],
-          name: '',
+          username: '',
           info: ''
       }
       this.handleNameChange = this.handleNameChange.bind(this);
@@ -20,8 +20,8 @@ class Entry extends Component {
     return <div>
             <form onSubmit={this.handleSubmit}>
               <label>
-                  Name:
-                 <input type="text" value={this.state.name} onChange={this.handleNameChange} />
+                  Username:
+                 <input type="text" value={this.state.username} onChange={this.handleNameChange} />
               </label>
               <br/>
               <label>
@@ -35,7 +35,7 @@ class Entry extends Component {
              {this.state.users.map(userInstance =>
                                 {
                                   return <div key={userInstance.id}>
-                                           <dt>{userInstance.firstName}</dt>
+                                           <dt>{userInstance.username}</dt>
                                            <dd>{userInstance.info}</dd>
                                            <button value={userInstance.id} onClick={this.handleDeleteUser}>Delete</button>
                                            <hr></hr>
@@ -59,8 +59,8 @@ class Entry extends Component {
   }
 
   handleNameChange(event) {
-    console.log('Handling name change: ' + event.target.value);
-    this.setState({name: event.target.value});
+    console.log('Handling username change: ' + event.target.value);
+    this.setState({username: event.target.value});
   }
 
   handleInfoChange(event) {
@@ -69,7 +69,7 @@ class Entry extends Component {
   }
 
   handleSubmit(event) {
-    console.log('A name was submitted: ' + this.state.name);
+    console.log('A username was submitted: ' + this.state.username);
 
     fetch('http://localhost:8080/add', {
       method: 'POST',
@@ -78,7 +78,7 @@ class Entry extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        firstName: this.state.name,
+        username: this.state.username,
         info: this.state.info
       })
     });
