@@ -8,10 +8,10 @@ class Entry extends Component {
       this.state = {
           users: [],
           username: '',
-          info: ''
+          password: ''
       }
       this.handleNameChange = this.handleNameChange.bind(this);
-      this.handleInfoChange = this.handleInfoChange.bind(this);
+      this.handlePasswordChange = this.handlePasswordChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleDeleteUser = this.handleDeleteUser.bind(this);
   }
@@ -25,8 +25,8 @@ class Entry extends Component {
               </label>
               <br/>
               <label>
-                  Info:
-                 <input type="text" value={this.state.info} onChange={this.handleInfoChange} />
+                  Password:
+                 <input type="text" value={this.state.password} onChange={this.handlePasswordChange} />
               </label>
               <br/>
               <input type="submit" value="Submit" />
@@ -36,7 +36,6 @@ class Entry extends Component {
                                 {
                                   return <div key={userInstance.id}>
                                            <dt>{userInstance.username}</dt>
-                                           <dd>{userInstance.info}</dd>
                                            <button value={userInstance.id} onClick={this.handleDeleteUser}>Delete</button>
                                            <hr></hr>
                                          </div>})
@@ -63,9 +62,9 @@ class Entry extends Component {
     this.setState({username: event.target.value});
   }
 
-  handleInfoChange(event) {
-    console.log('Handling info change: ' + event.target.value);
-    this.setState({info: event.target.value});
+  handlePasswordChange(event) {
+    console.log('Handling password change: ' + event.target.value);
+    this.setState({password: event.target.value});
   }
 
   handleSubmit(event) {
@@ -79,7 +78,7 @@ class Entry extends Component {
       },
       body: JSON.stringify({
         username: this.state.username,
-        info: this.state.info
+        password: this.state.password
       })
     });
   }
