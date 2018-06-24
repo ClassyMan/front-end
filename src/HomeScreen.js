@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Discussions from './Discussions.js';
 
 class HomeScreen extends Component {
 
@@ -8,7 +9,8 @@ class HomeScreen extends Component {
       this.state = {
         username: '',
         password: '',
-        loggedIn: ''
+        loggedIn: '',
+        registered: ''
       }
 
       this.handleNameChange = this.handleNameChange.bind(this);
@@ -19,7 +21,7 @@ class HomeScreen extends Component {
 
   render() {
     if (this.state.loggedIn) {
-      return <p>Login successful</p>
+      return <Discussions />
     } else {
       return <div>
                <input type="text" value={this.state.username} onChange={this.handleNameChange} />
@@ -76,7 +78,7 @@ class HomeScreen extends Component {
       console.log('response received');
       var text = res.status;
       console.log('Registration attempt: ' + text==='200');
-      this.setState({loggedIn: text==='200'})
+      this.setState({registered: text==='200'})
    });
   }
 
