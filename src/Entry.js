@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HomeScreen from './HomeScreen.js';
 
 class Entry extends Component {
 
@@ -18,6 +19,7 @@ class Entry extends Component {
 
   render() {
     return <div>
+            <HomeScreen />
             <form onSubmit={this.handleSubmit}>
               <label>
                   Username:
