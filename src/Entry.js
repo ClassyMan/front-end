@@ -19,7 +19,6 @@ class Entry extends Component {
 
   render() {
     return <div>
-            <HomeScreen />
             <form onSubmit={this.handleSubmit}>
               <label>
                   Username:
