@@ -33,14 +33,15 @@ class Entry extends Component {
               <input type="submit" value="Submit" />
              </form>
              <p>Users:</p>
-             {this.state.users.map(userInstance =>
-                                {
+               {
+                 this.state.users.map(userInstance => {
                                   return <div key={userInstance.id}>
                                            <dt>{userInstance.username}</dt>
                                            <button value={userInstance.id} onClick={this.handleDeleteUser}>Delete</button>
                                            <hr></hr>
-                                         </div>})
-                                }
+                                         </div>
+                 })
+               }
            </div>
   }
 
