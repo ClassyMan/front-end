@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Discussions from './Discussions.js';
+import Menu from 'Menu.js';
 
 class HomeScreen extends Component {
 
@@ -20,8 +21,11 @@ class HomeScreen extends Component {
   }
 
   render() {
-    if (this.state.loggedIn) {
-      return <Discussions />
+    if (localStorage.getItem('loggedIn')) {
+      return <div>
+               <Menu />
+               <Discussions />
+             </div>
     } else {
       return <div>
                <input type="text" value={this.state.username} onChange={this.handleNameChange} />
@@ -57,6 +61,7 @@ class HomeScreen extends Component {
    .then((text) => {
       console.log('Login status?: ' + text);
       var retreived = text.length ? JSON.parse(text) : {};
+      localStorage.setItem('loggedIn', retreived);
       this.setState({loggedIn: retreived})
    });
   }
