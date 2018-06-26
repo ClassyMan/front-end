@@ -39,7 +39,9 @@ export default class Discussions extends Component {
                <button onClick={this.handleAddNewDiscussion}>Add new discussion</button>
                <p>Discussions</p>
                {
-                 this.state.discussions.map(discussion => {
+                 this.state.discussions
+                 .sort((a, b) => a.createdTime < b.createdTime)
+                 .map(discussion => {
                                   return <div key={discussion.id}>
                                            <h1>{discussion.title}</h1>
                                            <p>{discussion.summary}</p>
