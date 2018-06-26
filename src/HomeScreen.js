@@ -17,6 +17,7 @@ class HomeScreen extends Component {
       this.handleNameChange = this.handleNameChange.bind(this);
       this.handlePasswordChange = this.handlePasswordChange.bind(this);
       this.handleLoginAttempt = this.handleLoginAttempt.bind(this);
+      this.handleLogoutAttempt = this.handleLogoutAttempt.bind(this);
       this.handleRegistrationAttempt = this.handleRegistrationAttempt.bind(this);
   }
 
@@ -64,6 +65,12 @@ class HomeScreen extends Component {
       localStorage.setItem('loggedIn', retreived);
       this.setState({loggedIn: retreived})
    });
+  }
+
+  handleLogoutAttempt(event) {
+    console.log('logging out');
+    localStorage.setItem('loggedIn', false);
+    this.setState({loggedIn: false})
   }
 
   handleRegistrationAttempt(event) {
