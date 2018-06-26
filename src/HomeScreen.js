@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Discussions from './Discussions.js';
-import Menu from 'Menu.js';
+import Menu from './Menu.js';
 
 class HomeScreen extends Component {
 
