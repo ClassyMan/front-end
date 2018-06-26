@@ -24,7 +24,7 @@ class HomeScreen extends Component {
   render() {
     if (localStorage.getItem('loggedIn')) {
       return <div>
-               <Menu />
+               <Menu logoutMethod={this.handleLogoutAttempt}/>
                <Discussions />
              </div>
     } else {
