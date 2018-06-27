@@ -36,7 +36,7 @@ class HomeScreen extends Component {
     } else {
       return <div>
                <input type="text" value={this.state.username} onChange={this.handleNameChange} />
-               <input type="text" value={this.state.password} onChange={this.handlePasswordChange} />
+               <input type="password" value={this.state.password} onChange={this.handlePasswordChange} />
                <button disabled={!this.stateIsValid()} onClick={this.handleLoginAttempt}>Login</button>
                <button disabled={!this.stateIsValid()} onClick={this.handleRegistrationAttempt}>Register</button>
              </div>
