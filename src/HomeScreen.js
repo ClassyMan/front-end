@@ -41,7 +41,6 @@ class HomeScreen extends Component {
                <button disabled={!this.stateIsValid()} onClick={this.handleRegistrationAttempt}>Register</button>
              </div>
     }
-
   }
 
   /*
