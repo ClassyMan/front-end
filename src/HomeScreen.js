@@ -19,7 +19,7 @@ class HomeScreen extends Component {
       this.handleLoginAttempt = this.handleLoginAttempt.bind(this);
       this.handleLogoutAttempt = this.handleLogoutAttempt.bind(this);
       this.handleRegistrationAttempt = this.handleRegistrationAttempt.bind(this);
-      this.stateIsValid = this.stateIsValid.bind(this);
+      this.validate = this.validate.bind(this);
   }
 
   /*
@@ -28,17 +28,20 @@ class HomeScreen extends Component {
    */
   render() {
     console.log('logged in status' + localStorage.getItem('loggedIn'));
+
     if (localStorage.getItem('loggedIn') === 'true') {
       return <div>
                <Menu logoutMethod={this.handleLogoutAttempt}/>
                <Discussions />
              </div>
     } else {
+      const errors = this.validate(this.state.username, this.state.password);
+      const isEnabled = !Object.keys(errors).some(x => errors[x]);
       return <div>
-               <input type="text" value={this.state.username} onChange={this.handleNameChange} />
-               <input type="password" value={this.state.password} onChange={this.handlePasswordChange} />
-               <button disabled={!this.stateIsValid()} onClick={this.handleLoginAttempt}>Login</button>
-               <button disabled={!this.stateIsValid()} onClick={this.handleRegistrationAttempt}>Register</button>
+               <input type="text" value={this.state.username} onChange={this.handleNameChange} className={errors.username ? "error" : ""} />
+               <input type="password" value={this.state.password} onChange={this.handlePasswordChange} className={errors.password ? "error" : ""} />
+               <button disabled={!isEnabled} onClick={this.handleLoginAttempt}>Login</button>
+               <button disabled={!isEnabled} onClick={this.handleRegistrationAttempt}>Register</button>
              </div>
     }
   }
@@ -46,10 +49,12 @@ class HomeScreen extends Component {
   /*
    * Add some validation for the username and password
    */
-  stateIsValid() {
-    if (this.state.username.length > 0 && this.state.password.length > 8) {
-      return true;
-    }
+  validate(username, password) {
+    // True here means invalid. 
+    return {
+      username: username.length === 0,
+      password: password.length < 8,
+    };
   }
 
   /*
