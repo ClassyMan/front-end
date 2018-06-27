@@ -22,7 +22,8 @@ class HomeScreen extends Component {
   }
 
   render() {
-    if (localStorage.getItem('loggedIn')) {
+    console.log('logged in status' + localStorage.getItem('loggedIn'));
+    if (localStorage.getItem('loggedIn') === 'true') {
       return <div>
                <Menu logoutMethod={this.handleLogoutAttempt}/>
                <Discussions />
@@ -63,14 +64,17 @@ class HomeScreen extends Component {
       console.log('Login status?: ' + text);
       var retreived = text.length ? JSON.parse(text) : {};
       localStorage.setItem('loggedIn', retreived);
-      this.setState({loggedIn: retreived})
+      this.setState({loggedIn: retreived});
+      console.log('login status set to ' + retreived);
    });
   }
 
   handleLogoutAttempt(event) {
     console.log('logging out');
-    localStorage.setItem('loggedIn', false);
-    this.setState({loggedIn: false})
+    this.setState({loggedIn: false});
+    console.log('login status set to ' + this.state.loggedIn);
+    localStorage.setItem('loggedIn', 'false');
+    console.log('localStorage login status set to ' + localStorage.getItem('loggedIn'));
   }
 
   handleRegistrationAttempt(event) {
