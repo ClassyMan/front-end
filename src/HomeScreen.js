@@ -43,7 +43,10 @@ class HomeScreen extends Component {
     }
 
   }
- 
+
+  /*
+   * Add some validation for the username and password
+   */
   stateIsValid() {
     if (this.state.username.length > 0 && this.state.password.length > 8) {
       return true;
