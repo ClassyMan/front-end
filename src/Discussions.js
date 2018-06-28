@@ -56,14 +56,11 @@ export default class Discussions extends Component {
       };
       return <div>
                <form onSubmit={this.handleSubmit.bind(this)}>
-                 <label>
-                   Title:
-                   <input type="text" value={this.state.title} onChange={this.handleTitleChange.bind(this)} placeholder="Enter a title for this discussion" className={shouldMarkError('title') ? "error" : ""} onBlur={this.handleBlur('title')} />
-                 </label>
+                 <label>Submit a new discussion</label>
+                 <input type="text" value={this.state.title} onChange={this.handleTitleChange.bind(this)} placeholder="Enter a title for this discussion..." className={shouldMarkError('title') ? "error" : ""} onBlur={this.handleBlur('title')} />
                  <br/>
                  <label>
-                   Summary:
-                   <input type="text" value={this.state.summary} onChange={this.handleSummaryChange.bind(this)} />
+                   <textarea value={this.state.summary} onChange={this.handleSummaryChange.bind(this)} placeholder="Summarize it in more detail..." />
                  </label>
                  <br/>
                <input disabled={!isEnabled} type="submit" value="Submit" />
