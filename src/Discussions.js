@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {httpSettings} from './HttpSettings.js';
+import {headerSettings} from './HttpSettings.js';
 
 /*
  * Display a list of current discussions to the user:
@@ -66,7 +66,7 @@ export default class Discussions extends Component {
 
     fetch('http://localhost:8080/discussions/add', {
       method: 'POST',
-      headers: httpSettings,
+      headers: headerSettings,
       body: JSON.stringify({
         title: this.state.title,
         summary: this.state.summary
@@ -81,7 +81,7 @@ export default class Discussions extends Component {
   loadPagedDiscussions() {
     console.log('attempting to load discussions');
     return fetch('http://localhost:8080/discussions/listAll', {
-        headers: httpSettings
+        headers: headerSettings
       }
     )
     .then((res) => {

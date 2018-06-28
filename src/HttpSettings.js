@@ -1,4 +1,4 @@
-export var httpSettings =  {
+export var headerSettings =  {
   'Accept': 'application/json',
   'Content-Type': 'application/json',
 };
