@@ -11,8 +11,12 @@ class HomeScreen extends Component {
         username: '',
         password: '',
         loggedIn: '',
-        registered: ''
-      }
+        registered: '',
+        touched: {
+            username: false,
+            password: false
+        }
+      };
 
       this.handleNameChange = this.handleNameChange.bind(this);
       this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -20,6 +24,13 @@ class HomeScreen extends Component {
       this.handleLogoutAttempt = this.handleLogoutAttempt.bind(this);
       this.handleRegistrationAttempt = this.handleRegistrationAttempt.bind(this);
       this.validate = this.validate.bind(this);
+      this.handleBlur = this.handleBlur.bind(this);
+  }
+
+  handleBlur = (field) => (evt) => {
+    this.setState({
+      touched: { ...this.state.touched, [field]: true },
+    });
   }
 
   /*
@@ -37,9 +48,16 @@ class HomeScreen extends Component {
     } else {
       const errors = this.validate(this.state.username, this.state.password);
       const isEnabled = !Object.keys(errors).some(x => errors[x]);
+
+      const shouldMarkError = (field) => {
+        const hasError = errors[field];
+        const shouldShow = this.state.touched[field];
+        return hasError ? shouldShow : false;
+      };
+
       return <div>
-               <input type="text" value={this.state.username} onChange={this.handleNameChange} className={errors.username ? "error" : ""} />
-               <input type="password" value={this.state.password} onChange={this.handlePasswordChange} className={errors.password ? "error" : ""} />
+               <input type="text" value={this.state.username} onChange={this.handleNameChange} placeholder="Enter username" className={shouldMarkError('username') ? "error" : ""} onBlur={this.handleBlur('username')} />
+               <input type="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder="Enter password" className={shouldMarkError('password') ? "error" : ""} onBlur={this.handleBlur('password')} />
                <button disabled={!isEnabled} onClick={this.handleLoginAttempt}>Login</button>
                <button disabled={!isEnabled} onClick={this.handleRegistrationAttempt}>Register</button>
              </div>
@@ -50,7 +68,7 @@ class HomeScreen extends Component {
    * Add some validation for the username and password
    */
   validate(username, password) {
-    // True here means invalid. 
+    // True here means invalid.
     return {
       username: username.length === 0,
       password: password.length < 8,
