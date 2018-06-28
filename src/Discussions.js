@@ -14,17 +14,51 @@ export default class Discussions extends Component {
       discussions: [],
       title: '',
       summary: '',
-      addingNewDiscussion: false
+      addingNewDiscussion: false,
+      touched: {
+        title: false
+      }
+    };
+
+    // Can't really bind these where we use em so bind em in here
+    this.validate = this.validate.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+  }
+
+  /*
+   * Has this field been touched?
+   */
+  handleBlur = (field) => (evt) => {
+    this.setState({
+      touched: { ...this.state.touched, [field]: true },
+    });
+  }
+
+  /*
+   * Add some validation for the username and password
+   */
+  validate(state) {
+    // True here means invalid.
+    return {
+      username: state.title.length === 0
     };
   }
 
   render() {
     if (this.state.addingNewDiscussion) {
+      const errors = this.validate(this.state);
+      const isEnabled = !Object.keys(errors).some(x => errors[x]);
+
+      const shouldMarkError = (field) => {
+        const hasError = errors[field];
+        const shouldShow = this.state.touched[field];
+        return hasError ? shouldShow : false;
+      };
       return <div>
                <form onSubmit={this.handleSubmit.bind(this)}>
                  <label>
                    Title:
-                   <input type="text" value={this.state.title} onChange={this.handleTitleChange.bind(this)} />
+                   <input type="text" value={this.state.title} onChange={this.handleTitleChange.bind(this)} placeholder="Enter a title for this discussion" className={shouldMarkError('title') ? "error" : ""} onBlur={this.handleBlur('title')} />
                  </label>
                  <br/>
                  <label>
@@ -32,7 +66,7 @@ export default class Discussions extends Component {
                    <input type="text" value={this.state.summary} onChange={this.handleSummaryChange.bind(this)} />
                  </label>
                  <br/>
-               <input type="submit" value="Submit" />
+               <input disabled={!isEnabled} type="submit" value="Submit" />
              </form>
              </div>
     } else {
