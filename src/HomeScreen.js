@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Discussions from './Discussions.js';
 import Menu from './Menu.js';
+import {headerSettings} from './HttpSettings.js';
 
 export default class HomeScreen extends Component {
 
@@ -83,10 +84,7 @@ export default class HomeScreen extends Component {
 
     fetch('http://localhost:8080/auth/loginAttempt', {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
+      headers: headerSettings,
       body: JSON.stringify({
         username: this.state.username,
         password: this.state.password
@@ -129,10 +127,7 @@ export default class HomeScreen extends Component {
 
     fetch('http://localhost:8080/add', {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
+      headers: headerSettings,
       body: JSON.stringify({
         username: this.state.username,
         password: this.state.password
