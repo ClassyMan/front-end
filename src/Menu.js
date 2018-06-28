@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 
 export default class Menu extends Component {
   constructor(props) {
@@ -6,7 +7,7 @@ export default class Menu extends Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
   render() {
-    return <button onClick={this.handleLogout}>Log out</button>
+    return <Button onClick={this.handleLogout}>Log out</Button>
   }
 
   handleLogout() {

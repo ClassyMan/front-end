@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Discussions from './Discussions.js';
 import Menu from './Menu.js';
 import {headerSettings} from './HttpSettings.js';
-import { Button } from 'react-bootstrap';
+import { Button, FormGroup, FormControl } from 'react-bootstrap';
 
 export default class HomeScreen extends Component {
 
@@ -56,12 +56,14 @@ export default class HomeScreen extends Component {
         return hasError ? shouldShow : false;
       };
 
-      return <div>
-               <input type="text" value={this.state.username} onChange={this.handleNameChange.bind(this)} placeholder="Enter username" className={shouldMarkError('username') ? "error" : ""} onBlur={this.handleBlur('username')} />
-               <input type="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} placeholder="Enter password" className={shouldMarkError('password') ? "error" : ""} onBlur={this.handleBlur('password')} />
-               <Button disabled={!isEnabled} onClick={this.handleLoginAttempt.bind(this)}>Login</Button>
-               <Button disabled={!isEnabled} onClick={this.handleRegistrationAttempt.bind(this)}>Register</Button>
-             </div>
+      return <form>
+               <FormGroup controlId="loginorregister">
+                 <FormControl type="text" value={this.state.username} onChange={this.handleNameChange.bind(this)} placeholder="Enter username" className={shouldMarkError('username') ? "error" : ""} onBlur={this.handleBlur('username')} />
+                 <FormControl type="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} placeholder="Enter password" className={shouldMarkError('password') ? "error" : ""} onBlur={this.handleBlur('password')} />
+                 <Button disabled={!isEnabled} onClick={this.handleLoginAttempt.bind(this)}>Login</Button>
+                 <Button disabled={!isEnabled} onClick={this.handleRegistrationAttempt.bind(this)}>Register</Button>
+               </FormGroup>
+             </form>
     }
   }
 

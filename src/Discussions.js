@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {headerSettings} from './HttpSettings.js';
+import { Button, FormGroup, FormControl } from 'react-bootstrap';
 
 /*
  * Display a list of current discussions to the user:
@@ -55,7 +56,7 @@ export default class Discussions extends Component {
         return hasError ? shouldShow : false;
       };
       return <div>
-               <form onSubmit={this.handleSubmit.bind(this)}>
+               <form>
                  <label>Submit a new discussion</label><br/>
                  <input type="text" value={this.state.title} onChange={this.handleTitleChange.bind(this)} placeholder="Enter a title for this discussion..." className={shouldMarkError('title') ? "error" : ""} onBlur={this.handleBlur('title')} />
                  <br/>
@@ -63,12 +64,12 @@ export default class Discussions extends Component {
                    <textarea value={this.state.summary} onChange={this.handleSummaryChange.bind(this)} placeholder="Summarize it in more detail..." />
                  </label>
                  <br/>
-               <input disabled={!isEnabled} type="submit" value="Submit" />
+               <Button disabled={!isEnabled} type="submit" onClick={this.handleSubmit.bind(this)}>Submit</Button>
              </form>
              </div>
     } else {
       return <div>
-               <button onClick={this.handleAddNewDiscussion.bind(this)}>Add new discussion</button>
+               <Button onClick={this.handleAddNewDiscussion.bind(this)}>Add new discussion</Button>
                <p>Discussions</p>
                {
                  this.state.discussions
@@ -77,7 +78,7 @@ export default class Discussions extends Component {
                                   return <div key={discussion.id}>
                                            <h1>{discussion.title}</h1>
                                            <p>{discussion.summary}</p>
-                                           <button value={discussion.id}>Open</button>
+                                           <Button value={discussion.id}>Open</Button>
                                            <hr></hr>
                                          </div>
                  })
