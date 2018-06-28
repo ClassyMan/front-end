@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Discussions from './Discussions.js';
 import Menu from './Menu.js';
 import {headerSettings} from './HttpSettings.js';
+import { Button } from 'react-bootstrap';
 
 export default class HomeScreen extends Component {
 
@@ -58,8 +59,8 @@ export default class HomeScreen extends Component {
       return <div>
                <input type="text" value={this.state.username} onChange={this.handleNameChange.bind(this)} placeholder="Enter username" className={shouldMarkError('username') ? "error" : ""} onBlur={this.handleBlur('username')} />
                <input type="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} placeholder="Enter password" className={shouldMarkError('password') ? "error" : ""} onBlur={this.handleBlur('password')} />
-               <button disabled={!isEnabled} onClick={this.handleLoginAttempt.bind(this)}>Login</button>
-               <button disabled={!isEnabled} onClick={this.handleRegistrationAttempt.bind(this)}>Register</button>
+               <Button disabled={!isEnabled} onClick={this.handleLoginAttempt.bind(this)}>Login</Button>
+               <Button disabled={!isEnabled} onClick={this.handleRegistrationAttempt.bind(this)}>Register</Button>
              </div>
     }
   }
