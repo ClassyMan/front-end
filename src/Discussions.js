@@ -54,18 +54,11 @@ export default class Discussions extends Component {
     }
   }
 
-  handleAddNewDiscussion() {
-    this.setState({addingNewDiscussion: true});
-  }
+  handleAddNewDiscussion() {this.setState({addingNewDiscussion: true})}
 
-  handleTitleChange(event) {
-    this.setState({title: event.target.value});
-  }
+  handleTitleChange(event) {this.setState({title: event.target.value})}
 
-  handleSummaryChange(event) {
-    console.log('handling state change: ' + event.target.value);
-    this.setState({summary: event.target.value})
-  }
+  handleSummaryChange(event) {this.setState({summary: event.target.value})}
 
   handleSubmit(event) {
     console.log('A discussion was submitted: ' + this.state.title);
