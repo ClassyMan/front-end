@@ -18,11 +18,7 @@ class HomeScreen extends Component {
         }
       };
 
-      this.handleNameChange = this.handleNameChange.bind(this);
-      this.handlePasswordChange = this.handlePasswordChange.bind(this);
-      this.handleLoginAttempt = this.handleLoginAttempt.bind(this);
-      this.handleLogoutAttempt = this.handleLogoutAttempt.bind(this);
-      this.handleRegistrationAttempt = this.handleRegistrationAttempt.bind(this);
+      // Can't really bind these where we use em so bind em in here
       this.validate = this.validate.bind(this);
       this.handleBlur = this.handleBlur.bind(this);
   }
@@ -42,7 +38,7 @@ class HomeScreen extends Component {
 
     if (localStorage.getItem('loggedIn') === 'true') {
       return <div>
-               <Menu logoutMethod={this.handleLogoutAttempt}/>
+               <Menu logoutMethod={this.handleLogoutAttempt.bind(this)}/>
                <Discussions />
              </div>
     } else {
@@ -56,10 +52,10 @@ class HomeScreen extends Component {
       };
 
       return <div>
-               <input type="text" value={this.state.username} onChange={this.handleNameChange} placeholder="Enter username" className={shouldMarkError('username') ? "error" : ""} onBlur={this.handleBlur('username')} />
-               <input type="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder="Enter password" className={shouldMarkError('password') ? "error" : ""} onBlur={this.handleBlur('password')} />
-               <button disabled={!isEnabled} onClick={this.handleLoginAttempt}>Login</button>
-               <button disabled={!isEnabled} onClick={this.handleRegistrationAttempt}>Register</button>
+               <input type="text" value={this.state.username} onChange={this.handleNameChange.bind(this)} placeholder="Enter username" className={shouldMarkError('username') ? "error" : ""} onBlur={this.handleBlur('username')} />
+               <input type="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} placeholder="Enter password" className={shouldMarkError('password') ? "error" : ""} onBlur={this.handleBlur('password')} />
+               <button disabled={!isEnabled} onClick={this.handleLoginAttempt.bind(this)}>Login</button>
+               <button disabled={!isEnabled} onClick={this.handleRegistrationAttempt.bind(this)}>Register</button>
              </div>
     }
   }
