@@ -23,6 +23,9 @@ class HomeScreen extends Component {
       this.handleBlur = this.handleBlur.bind(this);
   }
 
+  /*
+   * Has this field been touched
+   */
   handleBlur = (field) => (evt) => {
     this.setState({
       touched: { ...this.state.touched, [field]: true },
