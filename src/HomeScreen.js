@@ -46,7 +46,7 @@ class HomeScreen extends Component {
                <Discussions />
              </div>
     } else {
-      const errors = this.validate(this.state.username, this.state.password);
+      const errors = this.validate(this.state);
       const isEnabled = !Object.keys(errors).some(x => errors[x]);
 
       const shouldMarkError = (field) => {
@@ -67,11 +67,11 @@ class HomeScreen extends Component {
   /*
    * Add some validation for the username and password
    */
-  validate(username, password) {
+  validate(state) {
     // True here means invalid.
     return {
-      username: username.length === 0,
-      password: password.length < 8,
+      username: state.username.length === 0,
+      password: state.password.length < 8,
     };
   }
 
