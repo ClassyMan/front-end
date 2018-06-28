@@ -24,7 +24,7 @@ export default class HomeScreen extends Component {
   }
 
   /*
-   * Has this field been touched
+   * Has this field been touched?
    */
   handleBlur = (field) => (evt) => {
     this.setState({
