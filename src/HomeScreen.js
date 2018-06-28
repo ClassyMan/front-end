@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Discussions from './Discussions.js';
 import Menu from './Menu.js';
 
-class HomeScreen extends Component {
+export default class HomeScreen extends Component {
 
   constructor(props) {
       super(props); // call super
@@ -148,18 +148,11 @@ class HomeScreen extends Component {
   /*
    * In the event of a name change, make sure that state is updated
    */
-  handleNameChange(event) {
-    console.log('Handling username change: ' + event.target.value);
-    this.setState({username: event.target.value});
-  }
+  handleNameChange(event) {this.setState({username: event.target.value})}
 
   /*
    * In the event of a password change, make sure that state is updated
    * Do not log out the password as this will still be in plain text form.
    */
-  handlePasswordChange(event) {
-    this.setState({password: event.target.value});
-  }
+  handlePasswordChange(event) {this.setState({password: event.target.value})}
 }
-
-export default HomeScreen;
