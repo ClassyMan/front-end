@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import HomeScreen from './HomeScreen.js';
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div className="App">
@@ -11,12 +11,9 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Intrinsic</h1>
         </header>
-      <br/>
-
+        <br/>
         <HomeScreen />
       </div>
     );
   }
-}
-
-export default App;
+};
