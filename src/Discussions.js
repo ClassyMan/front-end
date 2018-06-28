@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {httpSettings} from './HttpSettings.js';
 
 /*
  * Display a list of current discussions to the user:
@@ -65,10 +66,7 @@ export default class Discussions extends Component {
 
     fetch('http://localhost:8080/discussions/add', {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
+      headers: httpSettings,
       body: JSON.stringify({
         title: this.state.title,
         summary: this.state.summary
@@ -83,11 +81,7 @@ export default class Discussions extends Component {
   loadPagedDiscussions() {
     console.log('attempting to load discussions');
     return fetch('http://localhost:8080/discussions/listAll', {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json', // explicitly set the content-type
-          // spring is funny about this for some reason
-        }
+        headers: httpSettings
       }
     )
     .then((res) => {
