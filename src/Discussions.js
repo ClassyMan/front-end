@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 
+/*
+ * Display a list of current discussions to the user:
+ * - Ordered by youngest first
+ * - Allow a user to add a discussion
+ */
 export default class Discussions extends Component {
 
   constructor(props) {
-        super(props);
+    super(props);
     this.state = {
       discussions: [],
       title: '',
