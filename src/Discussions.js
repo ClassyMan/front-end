@@ -9,26 +9,21 @@ export default class Discussions extends Component {
       title: '',
       summary: '',
       addingNewDiscussion: false
-    }
-
-    this.handleAddNewDiscussion = this.handleAddNewDiscussion.bind(this);
-    this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.handleSummaryChange = this.handleSummaryChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    };
   }
 
   render() {
     if (this.state.addingNewDiscussion) {
       return <div>
-               <form onSubmit={this.handleSubmit}>
+               <form onSubmit={this.handleSubmit.bind(this)}>
                  <label>
                    Title:
-                   <input type="text" value={this.state.title} onChange={this.handleTitleChange} />
+                   <input type="text" value={this.state.title} onChange={this.handleTitleChange.bind(this)} />
                  </label>
                  <br/>
                  <label>
                    Summary:
-                   <input type="text" value={this.state.summary} onChange={this.handleSummaryChange} />
+                   <input type="text" value={this.state.summary} onChange={this.handleSummaryChange.bind(this)} />
                  </label>
                  <br/>
                <input type="submit" value="Submit" />
@@ -36,7 +31,7 @@ export default class Discussions extends Component {
              </div>
     } else {
       return <div>
-               <button onClick={this.handleAddNewDiscussion}>Add new discussion</button>
+               <button onClick={this.handleAddNewDiscussion.bind(this)}>Add new discussion</button>
                <p>Discussions</p>
                {
                  this.state.discussions

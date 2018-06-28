@@ -13,8 +13,8 @@ export default class HomeScreen extends Component {
         loggedIn: '',
         registered: '',
         touched: {
-            username: false,
-            password: false
+          username: false,
+          password: false
         }
       };
 
