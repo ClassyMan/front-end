@@ -5,6 +5,9 @@ import './App.css';
 import HomeScreen from './HomeScreen.js';
 import NotFound from './NotFound.js';
 
+/*
+ * From here all things are possible
+ */
 export default class App extends Component {
   render() {
     return (
