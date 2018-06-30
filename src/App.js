@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Route, hashHistory } from 'react-router';
-import { Container, PageHeader } from 'react-bootstrap';
+import { PageHeader } from 'react-bootstrap';
 import logo from './logo.svg';
 import './App.css';
 import HomeScreen from './HomeScreen.js';
