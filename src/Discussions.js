@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {headerSettings} from './HttpSettings.js';
-import { Button, FormGroup, FormControl } from 'react-bootstrap';
+import { Panel, Button, FormGroup, FormControl } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 /*
@@ -77,11 +77,12 @@ export default class Discussions extends Component {
                  .sort((a, b) => a.createdTime < b.createdTime)
                  .map(discussion => {
 
-                                  return <div key={discussion.id}>
-                                           <Link to={"/viewdiscussion/" + discussion.id}>{discussion.title}</Link>&nbsp;
-                                           <p>{discussion.summary}</p>
-                                           <hr></hr>
-                                         </div>
+                                  return   <Panel key = {discussion.id}>
+                                      <Panel.Heading>
+                                        <Link to={"/viewdiscussion/" + discussion.id}>{discussion.title}</Link>
+                                      </Panel.Heading>
+                                      <Panel.Body>{discussion.summary}</Panel.Body>
+                                    </Panel>
                  })
                }
              </div>

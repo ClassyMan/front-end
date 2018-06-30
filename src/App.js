@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Router, Route, hashHistory } from 'react-router'
+import { Router, Route, hashHistory } from 'react-router';
+import { Container, PageHeader } from 'react-bootstrap';
 import logo from './logo.svg';
 import './App.css';
 import HomeScreen from './HomeScreen.js';
@@ -12,12 +13,11 @@ import ViewDiscussion from './ViewDiscussion.js';
 export default class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
+      <div>
+        <PageHeader className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Intrinsic</h1>
-        </header>
-        <br/>
+        </PageHeader>
         <Router history={hashHistory}>
           <Route path='/' component={HomeScreen} />
           <Route path='/viewdiscussion/:id' component={ViewDiscussion} />
