@@ -58,15 +58,15 @@ export default class Discussions extends Component {
       };
       return <div>
                <form>
-               <FormGroup>
-                 <label>Submit a new discussion</label><br/>
-                 <FormControl type="text" value={this.state.title} onChange={this.handleTitleChange.bind(this)} placeholder="Enter a title for this discussion..." className={shouldMarkError('title') ? "error" : ""} onBlur={this.handleBlur('title')} />
-                 <br/>
-                 <FormControl componentClass="textarea" value={this.state.summary} onChange={this.handleSummaryChange.bind(this)} placeholder="Summarize it in more detail..." />
-                 <br/>
-                 <Button disabled={!isEnabled} type="submit" onClick={this.handleSubmit.bind(this)}>Submit</Button>
-               </FormGroup>
-             </form>
+                 <FormGroup>
+                   <label>Submit a new discussion</label><br/>
+                   <FormControl type="text" value={this.state.title} onChange={this.handleTitleChange.bind(this)} placeholder="Enter a title for this discussion..." className={shouldMarkError('title') ? "error" : ""} onBlur={this.handleBlur('title')} />
+                   <br/>
+                   <FormControl componentClass="textarea" value={this.state.summary} onChange={this.handleSummaryChange.bind(this)} placeholder="Summarize it in more detail..." />
+                   <br/>
+                   <Button disabled={!isEnabled} type="submit" onClick={this.handleSubmit.bind(this)}>Submit</Button>
+                 </FormGroup>
+               </form>
              </div>
     } else {
       return <div>
