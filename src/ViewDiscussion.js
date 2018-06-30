@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Label, Button, FormGroup, FormControl } from 'react-bootstrap';
 import {headerSettings} from './HttpSettings.js';
 import Comment from './Comment.js';
+import { Link } from 'react-router';
 
 /*
  * Component for viewing and discussing a single discussion
@@ -50,6 +51,7 @@ export default class ViewDiscussion extends Component {
   render() {
     if (!this.state.addingNewComment) {
       return <div>
+               <Button><Link to="/">Home</Link></Button>
                <p>you are viewing the {this.props.params.id} discussion</p>
                <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>
                {

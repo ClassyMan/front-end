@@ -76,7 +76,6 @@ export default class Discussions extends Component {
                  this.state.discussions
                  .sort((a, b) => a.createdTime < b.createdTime)
                  .map(discussion => {
-
                    return <Panel key = {discussion.id}>
                             <Panel.Heading>
                               <Link to={"/viewdiscussion/" + discussion.id}>{discussion.title}</Link>
