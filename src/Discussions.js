@@ -78,9 +78,8 @@ export default class Discussions extends Component {
                  .map(discussion => {
 
                                   return <div key={discussion.id}>
-                                           <h1>{discussion.title}</h1>
-                                           <p>{discussion.summary}</p>
                                            <Link to={"/viewdiscussion/" + discussion.id}>{discussion.title}</Link>&nbsp;
+                                           <p>{discussion.summary}</p>
                                            <hr></hr>
                                          </div>
                  })
