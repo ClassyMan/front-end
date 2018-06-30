@@ -99,6 +99,7 @@ export default class ViewDiscussion extends Component {
 
   handleSubmit(event) {
     console.log('A comment was submitted by: ' + this.state.username);
+    console.log('In discussion: ' + this.props.params.id);
 
     fetch('http://localhost:8080/comments/add', {
       method: 'POST',
@@ -119,9 +120,13 @@ export default class ViewDiscussion extends Component {
   }
 
   loadPagedComments() {
-    console.log('attempting to load comments');
-    return fetch('http://localhost:8080/comments/listAll', {
-        headers: headerSettings
+    console.log('Loading comments for discussion: ' + this.props.params.id);
+    return fetch('http://localhost:8080/comments/fetchCommentsForDiscussion', {
+        method: 'POST',
+        headers: headerSettings,
+        body: JSON.stringify({
+          discussionId: this.props.params.id
+        })
       }
     )
     .then((res) => {
