@@ -3,6 +3,7 @@ import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 're
 import logo from './logo.svg';
 import './App.css';
 import HomeScreen from './HomeScreen.js';
+import NotFound from './NotFound.js';
 
 export default class App extends Component {
   render() {
@@ -15,8 +16,8 @@ export default class App extends Component {
         <br/>
         <Router history={hashHistory}>
           <Route path='/' component={HomeScreen} />
+          <Route path='*' component={NotFound} />
         </Router>
-
       </div>
     );
   }
