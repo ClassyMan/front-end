@@ -24,6 +24,6 @@ export default class App extends Component {
           <Route path='*' component={NotFound} />
         </Router>
       </div>
-    );
+    ); 
   }
 };
