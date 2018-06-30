@@ -20,11 +20,7 @@ export default class ViewDiscussion extends Component {
       summary: '',
       comments: [],
       username: '',
-      content: '',
-      addingNewComment: false,
-      touched: {
-        content: false
-      }
+      addingNewComment: false
     };
       // Can't really bind these where we use em so bind em in here
     this.validate = this.validate.bind(this);
@@ -71,15 +67,6 @@ export default class ViewDiscussion extends Component {
              </div>
     } else {
 
-      const errors = this.validate(this.state);
-      const isEnabled = !Object.keys(errors).some(x => errors[x]);
-
-      const shouldMarkError = (field) => {
-        const hasError = errors[field];
-        const shouldShow = this.state.touched[field];
-        return hasError ? shouldShow : false;
-      };
-
       return <div>
                <p>you are viewing the {this.props.params.id} discussion</p>
                <form>
@@ -97,24 +84,6 @@ export default class ViewDiscussion extends Component {
   }
 
   handleAddNewComment() {this.setState({addingNewComment: true})}
-  handleContentChange(event) {this.setState({content: event.target.value})}
-
-  handleSubmit(event) {
-    console.log('A comment was submitted by: ' + this.state.username);
-    console.log('In discussion: ' + this.props.params.id);
-
-    fetch('http://localhost:8080/comments/add', {
-      method: 'POST',
-      headers: headerSettings,
-      body: JSON.stringify({
-        discussionId: this.props.params.id,
-        username: this.state.username,
-        content: this.state.content
-      })
-    }).then((res) => {
-      this.setState({addingNewComment: false});
-    });
-  }
 
   componentDidMount() {
     this.setState({username: localStorage.getItem('username')});
