@@ -122,6 +122,7 @@ export default class ViewDiscussion extends Component {
   }
 
   componentDidMount() {
+    this.setState({username: localStorage.getItem('username')});
     this.loadPagedComments()
   }
 

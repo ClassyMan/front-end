@@ -103,6 +103,7 @@ export default class HomeScreen extends Component {
       console.log('Login status?: ' + text);
       var retreived = text.length ? JSON.parse(text) : {};
       localStorage.setItem('loggedIn', retreived);
+      localStorage.setItem('username', this.state.username);
       this.setState({loggedIn: retreived});
       console.log('login status set to ' + retreived);
    });
