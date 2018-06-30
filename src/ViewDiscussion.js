@@ -118,4 +118,27 @@ export default class ViewDiscussion extends Component {
       })
     });
   }
+
+  componentDidMount() {
+    this.loadPagedComments()
+  }
+
+  loadPagedComments() {
+    console.log('attempting to load comments');
+    return fetch('http://localhost:8080/comments/listAll', {
+        headers: headerSettings
+      }
+    )
+    .then((res) => {
+       console.log('response received');
+       var text = res.text();
+       console.log('result: ' + text);
+       return text;
+    })
+    .then((text) => {
+       console.log('parsing json: ' + text);
+       var retreived = text.length ? JSON.parse(text) : {};
+       this.setState({comments: retreived})
+    });
+  }
 }
