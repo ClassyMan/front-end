@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Label, Button, FormGroup, FormControl } from 'react-bootstrap';
+import { Panel, PanelHeader, Label, Button, FormGroup, FormControl } from 'react-bootstrap';
 import {headerSettings} from './HttpSettings.js';
+import Comment from './Comment.js';
 
 /*
  * Component for viewing and discussing a single discussion
@@ -47,7 +48,7 @@ export default class ViewDiscussion extends Component {
   }
 
   render() {
-    if (this.state.addingNewComment) {
+    if (!this.state.addingNewComment) {
       return <div>
                <p>you are viewing the {this.props.params.id} discussion</p>
                <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>
@@ -55,12 +56,7 @@ export default class ViewDiscussion extends Component {
                  this.state.comments
                  .sort((a, b) => a.createdTime < b.createdTime)
                  .map(comment => {
-
-                                  return <div key={comment.id}>
-                                           <h1>{comment.username}</h1>
-                                           <p>{comment.content}</p>
-                                           <hr></hr>
-                                         </div>
+                                  return <Comment key={comment.id} username={comment.username} content={comment.content} />
                  })
                }
              </div>
@@ -91,12 +87,7 @@ export default class ViewDiscussion extends Component {
                  this.state.comments
                  .sort((a, b) => a.createdTime < b.createdTime)
                  .map(comment => {
-
-                                  return <div key={comment.id}>
-                                           <h1>{comment.username}</h1>
-                                           <p>{comment.content}</p>
-                                           <hr></hr>
-                                         </div>
+                   return <Comment key={comment.id} username={comment.username} content={comment.content} />
                  })
                }
              </div>
@@ -108,7 +99,6 @@ export default class ViewDiscussion extends Component {
 
   handleSubmit(event) {
     console.log('A comment was submitted by: ' + this.state.username);
-    this.setState({addingNewComment: false});
 
     fetch('http://localhost:8080/comments/add', {
       method: 'POST',
@@ -118,6 +108,8 @@ export default class ViewDiscussion extends Component {
         username: this.state.username,
         content: this.state.content
       })
+    }).then((res) => {
+      this.setState({addingNewComment: false});
     });
   }
 
