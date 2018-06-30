@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {headerSettings} from './HttpSettings.js';
 import { Button, FormGroup, FormControl } from 'react-bootstrap';
+import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router';
 
 /*
  * Display a list of current discussions to the user:
@@ -75,10 +76,11 @@ export default class Discussions extends Component {
                  this.state.discussions
                  .sort((a, b) => a.createdTime < b.createdTime)
                  .map(discussion => {
+
                                   return <div key={discussion.id}>
                                            <h1>{discussion.title}</h1>
                                            <p>{discussion.summary}</p>
-                                           <Button value={discussion.id}>Open</Button>
+                                           <Link to={"/viewdiscussion?id=" + discussion.id}>{discussion.title}</Link>&nbsp;
                                            <hr></hr>
                                          </div>
                  })
