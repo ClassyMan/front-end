@@ -108,13 +108,15 @@ export default class ViewDiscussion extends Component {
 
   handleSubmit(event) {
     console.log('A comment was submitted by: ' + this.state.username);
+    this.setState({addingNewComment: false});
 
     fetch('http://localhost:8080/comments/add', {
       method: 'POST',
       headers: headerSettings,
       body: JSON.stringify({
-        title: this.state.username,
-        summary: this.state.content
+        discussionId: this.props.params.id,
+        username: this.state.username,
+        content: this.state.content
       })
     });
   }
