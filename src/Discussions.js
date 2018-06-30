@@ -77,12 +77,12 @@ export default class Discussions extends Component {
                  .sort((a, b) => a.createdTime < b.createdTime)
                  .map(discussion => {
 
-                                  return   <Panel key = {discussion.id}>
-                                      <Panel.Heading>
-                                        <Link to={"/viewdiscussion/" + discussion.id}>{discussion.title}</Link>
-                                      </Panel.Heading>
-                                      <Panel.Body>{discussion.summary}</Panel.Body>
-                                    </Panel>
+                   return <Panel key = {discussion.id}>
+                            <Panel.Heading>
+                              <Link to={"/viewdiscussion/" + discussion.id}>{discussion.title}</Link>
+                            </Panel.Heading>
+                            <Panel.Body>{discussion.summary}</Panel.Body>
+                          </Panel>
                  })
                }
              </div>
