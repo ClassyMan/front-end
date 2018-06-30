@@ -149,7 +149,7 @@ export default class ViewDiscussion extends Component {
        this.setState({comments: retreived})
     });
 
-    fetch('http://localhost:8080/comments/fetchDiscussionById', {
+    fetch('http://localhost:8080/discussions/fetchDiscussionById', {
         method: 'POST',
         headers: headerSettings,
         body: JSON.stringify({

@@ -16,7 +16,7 @@ export default class App extends Component {
       <div>
         <PageHeader className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Intrinsic</h1>
+          Intrinsic
         </PageHeader>
         <Router history={hashHistory}>
           <Route path='/' component={HomeScreen} />
@@ -24,6 +24,6 @@ export default class App extends Component {
           <Route path='*' component={NotFound} />
         </Router>
       </div>
-    ); 
+    );
   }
 };
