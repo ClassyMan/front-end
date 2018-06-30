@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router'
 import logo from './logo.svg';
 import './App.css';
 import HomeScreen from './HomeScreen.js';
@@ -12,7 +13,10 @@ export default class App extends Component {
           <h1 className="App-title">Intrinsic</h1>
         </header>
         <br/>
-        <HomeScreen />
+        <Router history={hashHistory}>
+          <Route path='/' component={HomeScreen} />
+        </Router>
+
       </div>
     );
   }
