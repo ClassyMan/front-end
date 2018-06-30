@@ -9,7 +9,6 @@ import CommentForm from './CommentForm.js';
  */
 export default class ViewDiscussion extends Component {
 
-
   /*
    * Set up state to handle comment adding and loading
    */
@@ -21,28 +20,6 @@ export default class ViewDiscussion extends Component {
       comments: [],
       username: '',
       addingNewComment: false
-    };
-      // Can't really bind these where we use em so bind em in here
-    this.validate = this.validate.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-  }
-
-  /*
-   * Has this field been touched?
-   */
-  handleBlur = (field) => (evt) => {
-    this.setState({
-      touched: { ...this.state.touched, [field]: true },
-    });
-  }
-
-  /*
-   * Add some validation for the content
-   */
-  validate(state) {
-    // True here means invalid.
-    return {
-      content: state.content.length === 0
     };
   }
 
@@ -76,7 +53,7 @@ export default class ViewDiscussion extends Component {
                  this.state.comments
                  .sort((a, b) => a.createdTime < b.createdTime)
                  .map(comment => {
-                   return <Comment key={comment.id} username={comment.username} content={comment.content} />
+                   return <Comment key={comment.id} username={comment.username} content={comment.content} id={this.props.params.id}/>
                  })
                }
              </div>
