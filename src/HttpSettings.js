@@ -1,5 +1,5 @@
 /*
- * Common place to store Http settings
+ * Common place to store settings related to http requests
  */
 export var headerSettings =  {
   'Accept': 'application/json',

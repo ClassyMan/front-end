@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import HomeScreen from './HomeScreen.js';
 import NotFound from './NotFound.js';
+import ViewDiscussion from './ViewDiscussion.js';
 
 /*
  * From here all things are possible
@@ -19,6 +20,7 @@ export default class App extends Component {
         <br/>
         <Router history={hashHistory}>
           <Route path='/' component={HomeScreen} />
+          <Route path='/viewdiscussion/:id' component={ViewDiscussion} />
           <Route path='*' component={NotFound} />
         </Router>
       </div>

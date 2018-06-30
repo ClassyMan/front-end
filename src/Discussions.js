@@ -80,7 +80,7 @@ export default class Discussions extends Component {
                                   return <div key={discussion.id}>
                                            <h1>{discussion.title}</h1>
                                            <p>{discussion.summary}</p>
-                                           <Link to={"/viewdiscussion?id=" + discussion.id}>{discussion.title}</Link>&nbsp;
+                                           <Link to={"/viewdiscussion/" + discussion.id}>{discussion.title}</Link>&nbsp;
                                            <hr></hr>
                                          </div>
                  })
