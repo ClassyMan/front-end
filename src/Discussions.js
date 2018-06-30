@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {headerSettings} from './HttpSettings.js';
 import { Button, FormGroup, FormControl } from 'react-bootstrap';
-import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 
 /*
  * Display a list of current discussions to the user:

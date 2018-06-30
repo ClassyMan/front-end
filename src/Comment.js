@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Panel, Label, Button, FormGroup, FormControl } from 'react-bootstrap';
-import {headerSettings} from './HttpSettings.js';
+import { Panel } from 'react-bootstrap';
 
 /*
  * Component for viewing and discussing a single discussion

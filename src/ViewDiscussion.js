@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel, PanelHeader, Label, Button, FormGroup, FormControl } from 'react-bootstrap';
+import { Label, Button, FormGroup, FormControl } from 'react-bootstrap';
 import {headerSettings} from './HttpSettings.js';
 import Comment from './Comment.js';
 
