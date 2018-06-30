@@ -3,6 +3,7 @@ import { Panel, Label, Button, FormGroup, FormControl } from 'react-bootstrap';
 import {headerSettings} from './HttpSettings.js';
 import Comment from './Comment.js';
 import { Link } from 'react-router';
+import CommentForm from './CommentForm.js';
 /*
  * Component for viewing and discussing a single discussion
  */
@@ -82,14 +83,7 @@ export default class ViewDiscussion extends Component {
       return <div>
                <p>you are viewing the {this.props.params.id} discussion</p>
                <form>
-                 <FormGroup>
-                   <label>Reply</label><br/>
-                   <Label type="text" value={this.state.username}/>
-                   <br/>
-                   <FormControl componentClass="textarea" value={this.state.content} onChange={this.handleContentChange.bind(this)} placeholder="Reply to OP, be nice..." className={shouldMarkError('content') ? "error" : ""} onBlur={this.handleBlur('content')}/>
-                   <br/>
-                   <Button disabled={!isEnabled} type="submit" onClick={this.handleSubmit.bind(this)}>Submit</Button>
-                 </FormGroup>
+                 <CommentForm username={this.state.username} id={this.props.params.id}/>
                </form>
                {
                  this.state.comments
