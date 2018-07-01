@@ -27,11 +27,22 @@ class Comment extends Component {
     } else {
       footer = <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>;
     }
+
+
+    let commentList = <div>{
+      this.props.comment.childeren
+          .sort((a, b) => a.createdTime < b.createdTime)
+          .map(comment => {
+            return <Comment key={comment.id} comment={comment} id={this.props.id}/>
+          })
+    }</div>;
+
     return <div>
              <Panel>
                <Panel.Heading>{this.props.comment.username}</Panel.Heading>
                <Panel.Body>{this.props.comment.content}</Panel.Body>
                {footer}
+               {commentList}
              </Panel>
            </div>
   }
@@ -45,8 +56,9 @@ class Comment extends Component {
 
 Comment.propTypes = {
   comment: PropTypes.shape(
-    {username: PropTypes.string,
-     content: PropTypes.string}
+    {username: PropTypes.string.isRequired,
+     content: PropTypes.string.isRequired,
+     childeren: PropTypes.array.isRequired}
   ).isRequired,
   id: PropTypes.string.isRequired
 }
