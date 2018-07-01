@@ -21,16 +21,10 @@ export default class Comment extends Component {
   render() {
     let footer;
     if (this.state.addingNewComment == true) {
-      footer = <Label>Success</Label>;
+      footer = <CommentForm username={this.props.username} id={this.props.id}/>;
     } else {
       footer = <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>;
     }
-    //
-    // if (this.state.addingNewComment) {
-    //   footer = <CommentForm username={this.props.username} id={this.props.id}/>
-    // } else {
-    //   footer = <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>;
-    // }
     return <div>
              <Panel>
                <Panel.Heading>{this.props.username}</Panel.Heading>
