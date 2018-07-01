@@ -23,7 +23,7 @@ class Comment extends Component {
   render() {
     let footer;
     if (this.state.addingNewComment === true) {
-      footer = <CommentForm username={this.props.comment.username} id={this.props.id}/>;
+      footer = <CommentForm comment={this.props.comment} id={this.props.id}/>;
     } else {
       footer = <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>;
     }

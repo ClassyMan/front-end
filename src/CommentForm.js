@@ -65,7 +65,7 @@ export default class CommentForm extends Component {
   handleContentChange(event) {this.setState({content: event.target.value})}
 
   handleSubmit(event) {
-    console.log('A comment was submitted by: ' + this.props.username);
+    console.log('A comment was submitted by: ' + this.props.comment.username);
     console.log('In discussion: ' + this.props.id);
 
     fetch('http://localhost:8080/comments/add', {
@@ -73,8 +73,9 @@ export default class CommentForm extends Component {
       headers: headerSettings,
       body: JSON.stringify({
         discussionId: this.props.id,
-        username: this.props.username,
-        content: this.state.content
+        username: this.props.comment.username,
+        content: this.state.content,
+        childeren: []
       })
     }).then((res) => {
       this.setState({addingNewComment: false});
