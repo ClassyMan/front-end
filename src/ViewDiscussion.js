@@ -24,6 +24,15 @@ export default class ViewDiscussion extends Component {
   }
 
   render() {
+
+    let commentList = <div>{
+      this.state.comments
+      .sort((a, b) => a.createdTime < b.createdTime)
+      .map(comment => {
+        return <Comment key={comment.id} comment={comment} id={this.props.params.id}/>
+      })
+    }</div>;
+
     if (!this.state.addingNewComment) {
       return <div>
                <Button><Link to="/">Home</Link></Button>
@@ -34,13 +43,7 @@ export default class ViewDiscussion extends Component {
                    <Panel.Body>{this.state.summary}</Panel.Body>
                </Panel>
                <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>
-               {
-                 this.state.comments
-                 .sort((a, b) => a.createdTime < b.createdTime)
-                 .map(comment => {
-                                  return <Comment key={comment.id} comment={comment} id={this.props.params.id}/>
-                 })
-               }
+               {commentList}
              </div>
     } else {
 
@@ -49,13 +52,7 @@ export default class ViewDiscussion extends Component {
                <form>
                  <CommentForm username={this.state.username} id={this.props.params.id}/>
                </form>
-               {
-                 this.state.comments
-                 .sort((a, b) => a.createdTime < b.createdTime)
-                 .map(comment => {
-                   return <Comment key={comment.id} comment={comment} id={this.props.params.id}/>
-                 })
-               }
+               {commentList}
              </div>
     }
   }
