@@ -38,7 +38,7 @@ export default class ViewDiscussion extends Component {
                  this.state.comments
                  .sort((a, b) => a.createdTime < b.createdTime)
                  .map(comment => {
-                                  return <Comment key={comment.id} username={comment.username} content={comment.content} />
+                                  return <Comment key={comment.id} comment={comment} id={this.props.params.id}/>
                  })
                }
              </div>
@@ -53,7 +53,7 @@ export default class ViewDiscussion extends Component {
                  this.state.comments
                  .sort((a, b) => a.createdTime < b.createdTime)
                  .map(comment => {
-                   return <Comment key={comment.id} username={comment.username} content={comment.content} id={this.props.params.id}/>
+                   return <Comment key={comment.id} comment={comment} id={this.props.params.id}/>
                  })
                }
              </div>

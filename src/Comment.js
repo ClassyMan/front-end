@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Label, Button, Panel } from 'react-bootstrap';
 import CommentForm from './CommentForm.js';
+import PropTypes from 'prop-types';
+
 
 /*
  * Component for viewing and discussing a single discussion
  */
-export default class Comment extends Component {
+class Comment extends Component {
 
   /*
    * Set up state to handle comment adding and loading
@@ -21,14 +23,14 @@ export default class Comment extends Component {
   render() {
     let footer;
     if (this.state.addingNewComment == true) {
-      footer = <CommentForm username={this.props.username} id={this.props.id}/>;
+      footer = <CommentForm username={this.props.comment.username} id={this.props.id}/>;
     } else {
       footer = <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>;
     }
     return <div>
              <Panel>
-               <Panel.Heading>{this.props.username}</Panel.Heading>
-               <Panel.Body>{this.props.content}</Panel.Body>
+               <Panel.Heading>{this.props.comment.username}</Panel.Heading>
+               <Panel.Body>{this.props.comment.content}</Panel.Body>
                {footer}
              </Panel>
            </div>
@@ -40,3 +42,13 @@ export default class Comment extends Component {
     console.log('newCommentFlag: ' + this.state.addingNewComment);
   }
 }
+
+Comment.propTypes = {
+  comment: PropTypes.shape(
+    {username: PropTypes.string,
+     content: PropTypes.string}
+  ).isRequired,
+  id: PropTypes.string.isRequired
+}
+
+export default Comment;
