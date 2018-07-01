@@ -109,6 +109,5 @@ export default class ViewDiscussion extends Component {
        this.setState({title: retreived.title,
                       summary: retreived.summary})
     });
-
   }
 }
