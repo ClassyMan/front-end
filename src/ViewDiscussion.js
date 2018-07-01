@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel, Label, Button, FormGroup, FormControl } from 'react-bootstrap';
+import { Panel, Button} from 'react-bootstrap';
 import {headerSettings} from './HttpSettings.js';
 import Comment from './Comment.js';
 import { Link } from 'react-router';
@@ -36,7 +36,7 @@ export default class ViewDiscussion extends Component {
     if (!this.state.addingNewComment) {
       return <div>
                <Button><Link to="/">Home</Link></Button>
-               <Panel >
+               <Panel>
                  <Panel.Heading>
                    <Panel.Title>{this.state.title} : {this.props.params.id}</Panel.Title>
                  </Panel.Heading>

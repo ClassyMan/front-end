@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Label, Button, Panel } from 'react-bootstrap';
+import { Button, Panel } from 'react-bootstrap';
 import CommentForm from './CommentForm.js';
 import PropTypes from 'prop-types';
 
@@ -22,7 +22,7 @@ class Comment extends Component {
 
   render() {
     let footer;
-    if (this.state.addingNewComment == true) {
+    if (this.state.addingNewComment === true) {
       footer = <CommentForm username={this.props.comment.username} id={this.props.id}/>;
     } else {
       footer = <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>;
