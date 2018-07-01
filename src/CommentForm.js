@@ -72,7 +72,7 @@ export default class CommentForm extends Component {
       method: 'POST',
       headers: headerSettings,
       body: JSON.stringify({
-        discussionId: this.props.id,
+        discussionId: this.props.discussionId,
         username: this.props.comment.username,
         content: this.state.content,
         childeren: []

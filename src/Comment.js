@@ -23,7 +23,7 @@ class Comment extends Component {
   render() {
     let footer;
     if (this.state.addingNewComment === true) {
-      footer = <CommentForm comment={this.props.comment} id={this.props.id}/>;
+      footer = <CommentForm comment={this.props.comment} discussionId={this.props.id}/>;
     } else {
       footer = <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>;
     }
@@ -33,7 +33,7 @@ class Comment extends Component {
       this.props.comment.childeren
           .sort((a, b) => a.createdTime < b.createdTime)
           .map(comment => {
-            return <Comment key={comment.id} comment={comment} id={this.props.id}/>
+            return <Comment key={comment.id} comment={comment} discussionId={this.props.id}/>
           })
     }</div>;
 
