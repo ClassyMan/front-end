@@ -23,19 +23,19 @@ class Comment extends Component {
   render() {
     let footer;
     if (this.state.addingNewComment === true) {
-      footer = <CommentForm comment={this.props.comment} discussionId={this.props.id}/>;
+      footer = <CommentForm comment={this.props.comment} parentId={this.props.comment.id} discussionId={this.props.id}/>;
     } else {
       footer = <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>;
     }
 
 
-    let commentList = <div>{
+    let commentList = <ul>{
       this.props.comment.childeren
           .sort((a, b) => a.createdTime < b.createdTime)
           .map(comment => {
-            return <Comment key={comment.id} comment={comment} discussionId={this.props.id}/>
+            return <li key={comment.id}><Comment key={comment.id} comment={comment} parentId={this.props.comment.id} discussionId={this.props.id}/></li>
           })
-    }</div>;
+    }</ul>;
 
     return <div>
              <Panel>
@@ -58,6 +58,7 @@ Comment.propTypes = {
   comment: PropTypes.shape(
     {username: PropTypes.string.isRequired,
      content: PropTypes.string.isRequired,
+     parentIds: PropTypes.array.isRequired,
      childeren: PropTypes.array.isRequired}
   ).isRequired,
   id: PropTypes.string.isRequired

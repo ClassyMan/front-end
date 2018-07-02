@@ -66,7 +66,8 @@ export default class CommentForm extends Component {
 
   handleSubmit(event) {
     console.log('A comment was submitted by: ' + this.props.comment.username);
-    console.log('In discussion: ' + this.props.id);
+    console.log('In discussion: ' + this.props.discussionId);
+    console.log('Parent id: ' + this.props.parentId);
 
     fetch('http://localhost:8080/comments/add', {
       method: 'POST',
@@ -75,6 +76,7 @@ export default class CommentForm extends Component {
         discussionId: this.props.discussionId,
         username: this.props.comment.username,
         content: this.state.content,
+        parentIds: this.props.parentIds,
         childeren: []
       })
     }).then((res) => {
