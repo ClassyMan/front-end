@@ -4,6 +4,8 @@ import {headerSettings} from './HttpSettings.js';
 import Comment from './Comment.js';
 import { Link } from 'react-router';
 import CommentForm from './CommentForm.js';
+import autobind from 'autobind-decorator';
+
 /*
  * Component for viewing and discussing a single discussion
  */
@@ -18,6 +20,7 @@ export default class ViewDiscussion extends Component {
       title: '',
       summary: '',
       comments: [],
+      content: '',
       comment: {
         username: '',
         content: '',
@@ -26,6 +29,9 @@ export default class ViewDiscussion extends Component {
       },
       addingNewComment: false
     };
+
+    this.handleAddNewComment=this.handleAddNewComment.bind(this);
+    this.handleCommentChange=this.handleCommentChange.bind(this);
   }
 
   render() {
@@ -34,7 +40,7 @@ export default class ViewDiscussion extends Component {
       this.state.comments
       .sort((a, b) => a.createdTime < b.createdTime)
       .map(comment => {
-        return <Comment key={comment.id} comment={comment} id={this.props.params.id}/>
+        return <Comment key={comment.id} comment={comment} discussionId={this.props.params.id}/>
       })
     }</div>;
 
@@ -47,7 +53,7 @@ export default class ViewDiscussion extends Component {
                  </Panel.Heading>
                    <Panel.Body>{this.state.summary}</Panel.Body>
                </Panel>
-               <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>
+               <Button onClick={this.handleAddNewComment}>Reply</Button>
                {commentList}
              </div>
     } else {
@@ -55,14 +61,16 @@ export default class ViewDiscussion extends Component {
       return <div>
                <p>you are viewing the {this.props.params.id} discussion</p>
                <form>
-                 <CommentForm comment={this.state.comment} discussionId={this.props.params.id}/>
+                 <CommentForm comment={this.props.comment} content={this.state.content} handleCommentChange={this.handleCommentChange} handleSubmit={this.handleSubmit} discussionId={this.props.discussionId}/>;
                </form>
                {commentList}
              </div>
     }
   }
 
-  handleAddNewComment() {this.setState({addingNewComment: true})}
+  handleCommentChange(event) {this.setState({content: event.target.value})}
+
+  handleAddNewComment(event) {this.setState({addingNewComment: true})}
 
   componentDidMount() {
     this.setState({username: localStorage.getItem('username')});

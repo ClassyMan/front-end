@@ -14,12 +14,6 @@ class CommentForm extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = {
-      content: '',
-      touched: {
-        content: false
-      }
-    };
       // Can't really bind these where we use em so bind em in here
     this.validate = this.validate.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
@@ -45,51 +39,28 @@ class CommentForm extends Component {
   }
 
   render() {
-    const errors = this.validate(this.state);
-    const isEnabled = !Object.keys(errors).some(x => errors[x]);
-
-    const shouldMarkError = (field) => {
-      const hasError = errors[field];
-      const shouldShow = this.state.touched[field];
-      return hasError ? shouldShow : false;
-    };
+    // const errors = this.validate(this.state);
+    // const isEnabled = !Object.keys(errors).some(x => errors[x]);
+    //
+    // const shouldMarkError = (field) => {
+    //   const hasError = errors[field];
+    //   const shouldShow = this.state.touched[field];
+    //   return hasError ? shouldShow : false;
+    // };
+    // //className={shouldMarkError('content') ? "error" : ""}
+    // //onBlur={this.handleBlur('content')}
     return <FormGroup>
              <label>Reply</label><br/>
              <Label type="text" value={this.props.username}/>
              <br/>
-             <FormControl componentClass="textarea" value={this.state.content} onChange={this.handleContentChange.bind(this)} placeholder="Reply to OP, be nice..." className={shouldMarkError('content') ? "error" : ""} onBlur={this.handleBlur('content')}/>
+             <FormControl componentClass="textarea" onChange={this.props.handleCommentChange} placeholder="Reply to OP, be nice..."/>
              <br/>
-             <Button disabled={!isEnabled} type="submit" onClick={this.handleSubmit.bind(this)}>Submit</Button>
+             <Button type="submit" onClick={this.props.handleSubmit}>Submit</Button>
            </FormGroup>
   }
-
-  handleContentChange(event) {this.setState({content: event.target.value})}
-
-  handleSubmit(event) {
-    console.log('A comment was submitted by: ' + this.props.comment.username);
-    console.log('In discussion: ' + this.props.discussionId);
-    console.log('Parent id: ' + this.props.parentId);
-
-    let updatedParents = this.props.comment.parentIds;
-    if (this.props.comment.id) {
-      updatedParents.push(this.props.comment.id);
-    }
-
-    fetch('http://localhost:8080/comments/add', {
-      method: 'POST',
-      headers: headerSettings,
-      body: JSON.stringify({
-        discussionId: this.props.discussionId,
-        username: this.props.comment.username,
-        content: this.state.content,
-        parentIds: updatedParents,
-        childeren: []
-      })
-    }).then((res) => {
-      this.setState({addingNewComment: false});
-    });
-  }
 }
+
+
 
 CommentForm.propTypes = {
   comment: PropTypes.shape(
