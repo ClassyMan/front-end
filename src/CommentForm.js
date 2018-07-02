@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Label, Button, FormGroup, FormControl } from 'react-bootstrap';
 import {headerSettings} from './HttpSettings.js';
 import Comment from './Comment.js';
+import PropTypes from 'prop-types';
 
 /*
  * Component for viewing and discussing a single discussion
  */
-export default class CommentForm extends Component {
+class CommentForm extends Component {
 
   /*
    * Set up state to handle comment adding and loading
@@ -69,6 +70,9 @@ export default class CommentForm extends Component {
     console.log('In discussion: ' + this.props.discussionId);
     console.log('Parent id: ' + this.props.parentId);
 
+    let updatedParents = this.props.comment.parentIds;
+    updatedParents.push(this.props.comment.id);
+
     fetch('http://localhost:8080/comments/add', {
       method: 'POST',
       headers: headerSettings,
@@ -76,7 +80,8 @@ export default class CommentForm extends Component {
         discussionId: this.props.discussionId,
         username: this.props.comment.username,
         content: this.state.content,
-        parentIds: this.props.parentIds,
+        parentId: this.props.comment.parentId,
+        parentIds: updatedParents,
         childeren: []
       })
     }).then((res) => {
@@ -84,3 +89,15 @@ export default class CommentForm extends Component {
     });
   }
 }
+
+CommentForm.propTypes = {
+  comment: PropTypes.shape(
+    {username: PropTypes.string.isRequired,
+     content: PropTypes.string.isRequired,
+     parentIds: PropTypes.array.isRequired,
+     childeren: PropTypes.array.isRequired}
+  ).isRequired,
+  discussionId: PropTypes.string.isRequired
+}
+
+export default CommentForm;

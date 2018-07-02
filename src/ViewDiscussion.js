@@ -18,7 +18,12 @@ export default class ViewDiscussion extends Component {
       title: '',
       summary: '',
       comments: [],
-      username: '',
+      comment: {
+        username: '',
+        content: '',
+        parentIds: [],
+        childeren:[]
+      },
       addingNewComment: false
     };
   }
@@ -50,7 +55,7 @@ export default class ViewDiscussion extends Component {
       return <div>
                <p>you are viewing the {this.props.params.id} discussion</p>
                <form>
-                 <CommentForm username={this.state.username} id={this.props.params.id}/>
+                 <CommentForm comment={this.state.comment} discussionId={this.props.params.id}/>
                </form>
                {commentList}
              </div>
