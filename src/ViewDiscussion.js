@@ -32,6 +32,7 @@ export default class ViewDiscussion extends Component {
 
     this.handleAddNewComment=this.handleAddNewComment.bind(this);
     this.handleCommentChange=this.handleCommentChange.bind(this);
+    this.handleSubmit=this.handleSubmit.bind(this);
   }
 
   render() {
@@ -61,7 +62,7 @@ export default class ViewDiscussion extends Component {
       return <div>
                <p>you are viewing the {this.props.params.id} discussion</p>
                <form>
-                 <CommentForm comment={this.props.comment} handleCommentChange={this.handleCommentChange} handleSubmit={this.handleSubmit} discussionId={this.props.discussionId}/>;
+                 <CommentForm handleCommentChange={this.handleCommentChange} handleSubmit={this.handleSubmit}/>;
                </form>
                {commentList}
              </div>
@@ -71,6 +72,31 @@ export default class ViewDiscussion extends Component {
   handleCommentChange(event) {this.setState({content: event.target.value})}
 
   handleAddNewComment(event) {this.setState({addingNewComment: true})}
+
+  handleSubmit(event) {
+    console.log('A comment was submitted by: ' + localStorage.getItem('username'));
+    console.log('In discussion: ' + this.props.discussionId);
+    console.log('Parent id: ' + this.props.parentId);
+
+    let updatedParents = this.state.comment.parentIds;
+    if (this.state.comment.id) {
+      updatedParents.push(this.state.comment.id);
+    }
+
+    fetch('http://localhost:8080/comments/add', {
+      method: 'POST',
+      headers: headerSettings,
+      body: JSON.stringify({
+        discussionId: this.props.params.id,
+        username: this.state.comment.username,
+        content: this.state.content,
+        parentIds: updatedParents,
+        childeren: []
+      })
+    }).then((res) => {
+      this.setState({addingNewComment: false});
+    });
+  }
 
   componentDidMount() {
     this.setState({username: localStorage.getItem('username')});
