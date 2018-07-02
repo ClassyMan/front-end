@@ -22,7 +22,7 @@ class Comment extends Component {
   render() {
     let footer;
     if (this.state.addingNewComment === true) {
-      footer = <CommentForm comment={this.props.comment} parentId={this.props.comment.id} discussionId={this.props.id}/>;
+      footer = <CommentForm comment={this.props.comment} discussionId={this.props.id}/>;
     } else {
       footer = <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>;
     }
@@ -32,7 +32,7 @@ class Comment extends Component {
       this.props.comment.childeren
           .sort((a, b) => a.createdTime < b.createdTime)
           .map(comment => {
-            return <li key={comment.id}><Comment key={comment.id} comment={comment} parentId={this.props.comment.id} discussionId={this.props.id}/></li>
+            return <li key={comment.id}><Comment key={comment.id} comment={comment} discussionId={this.props.id}/></li>
           })
     }</ul>;
 

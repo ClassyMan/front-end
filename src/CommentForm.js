@@ -71,7 +71,9 @@ class CommentForm extends Component {
     console.log('Parent id: ' + this.props.parentId);
 
     let updatedParents = this.props.comment.parentIds;
-    updatedParents.push(this.props.comment.id);
+    if (this.props.comment.id) {
+      updatedParents.push(this.props.comment.id);
+    }
 
     fetch('http://localhost:8080/comments/add', {
       method: 'POST',
@@ -80,7 +82,6 @@ class CommentForm extends Component {
         discussionId: this.props.discussionId,
         username: this.props.comment.username,
         content: this.state.content,
-        parentId: this.props.comment.parentId,
         parentIds: updatedParents,
         childeren: []
       })
