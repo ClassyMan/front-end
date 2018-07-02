@@ -61,7 +61,7 @@ export default class ViewDiscussion extends Component {
       return <div>
                <p>you are viewing the {this.props.params.id} discussion</p>
                <form>
-                 <CommentForm comment={this.props.comment} content={this.state.content} handleCommentChange={this.handleCommentChange} handleSubmit={this.handleSubmit} discussionId={this.props.discussionId}/>;
+                 <CommentForm comment={this.props.comment} handleCommentChange={this.handleCommentChange} handleSubmit={this.handleSubmit} discussionId={this.props.discussionId}/>;
                </form>
                {commentList}
              </div>

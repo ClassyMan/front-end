@@ -60,16 +60,4 @@ class CommentForm extends Component {
   }
 }
 
-
-
-CommentForm.propTypes = {
-  comment: PropTypes.shape(
-    {username: PropTypes.string.isRequired,
-     content: PropTypes.string.isRequired,
-     parentIds: PropTypes.array.isRequired,
-     childeren: PropTypes.array.isRequired}
-  ).isRequired,
-  discussionId: PropTypes.string.isRequired
-}
-
 export default CommentForm;
