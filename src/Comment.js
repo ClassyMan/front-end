@@ -55,11 +55,9 @@ class Comment extends Component {
     console.log('A comment was submitted by: ' + localStorage.getItem('username'));
     console.log('In discussion: ' + this.props.discussionId);
     let updatedParents = this.props.comment.parentIds.slice(0);
-    console.log(updatedParents);
     if (this.props.comment.id) {
       updatedParents.push(this.props.comment.id);
     }
-    console.log(updatedParents);
 
     console.log('Parent ids: ' + this.props.parentIds);
     let newComment = {
@@ -82,11 +80,7 @@ class Comment extends Component {
     });
   }
 
-  handleAddNewComment(event) {
-    console.log('newCommentFlag: ' + this.state.addingNewComment);
-    this.setState({addingNewComment: true});
-    console.log('newCommentFlag: ' + this.state.addingNewComment);
-  }
+  handleAddNewComment(event) {this.setState({addingNewComment: true});}
 }
 
 Comment.propTypes = {

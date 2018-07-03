@@ -78,7 +78,7 @@ export default class ViewDiscussion extends Component {
     console.log('In discussion: ' + this.props.discussionId);
     console.log('Parent id: ' + this.props.parentId);
 
-    let updatedParents = this.state.comment.parentIds;
+    let updatedParents = this.state.comment.parentIds.slice(0);
     if (this.state.comment.id) {
       updatedParents.push(this.state.comment.id);
     }
