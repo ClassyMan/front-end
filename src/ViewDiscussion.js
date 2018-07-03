@@ -25,7 +25,7 @@ export default class ViewDiscussion extends Component {
         username: '',
         content: '',
         parentIds: [],
-        childeren:[]
+        childeren: []
       },
       addingNewComment: false
     };
@@ -83,18 +83,24 @@ export default class ViewDiscussion extends Component {
       updatedParents.push(this.state.comment.id);
     }
 
+    let newComment = {
+      discussionId: this.props.params.id,
+      username: localStorage.getItem('username'),
+      content: this.state.content,
+      parentIds: updatedParents,
+      childeren: []
+    }
+
     fetch('http://localhost:8080/comments/add', {
       method: 'POST',
       headers: headerSettings,
-      body: JSON.stringify({
-        discussionId: this.props.params.id,
-        username: this.state.comment.username,
-        content: this.state.content,
-        parentIds: updatedParents,
-        childeren: []
-      })
+      body: JSON.stringify(newComment)
     }).then((res) => {
-      this.setState({addingNewComment: false});
+      return res.text();
+    }).then((text) => {
+      var retreived = text.length ? JSON.parse(text) : {};
+      this.setState({addingNewComment: false,
+                     comments: [retreived].concat(this.state.comments)});
     });
   }
 
