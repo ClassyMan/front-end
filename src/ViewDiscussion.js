@@ -32,9 +32,9 @@ export default class ViewDiscussion extends Component {
       addingNewComment: false
     };
 
-    this.handleAddNewComment=this.handleAddNewComment.bind(this);
+    this.handleClickReply=this.handleClickReply.bind(this);
     this.handleCommentChange=this.handleCommentChange.bind(this);
-    this.handleSubmit=this.handleSubmit.bind(this);
+    this.handleSaveNewComment=this.handleSaveNewComment.bind(this);
   }
 
   render() {
@@ -56,7 +56,7 @@ export default class ViewDiscussion extends Component {
                  </Panel.Heading>
                    <Panel.Body>{this.state.summary}</Panel.Body>
                </Panel>
-               <Button onClick={this.handleAddNewComment}>Reply</Button>
+               <Button onClick={this.handleClickReply}>Reply</Button>
                {commentList}
              </div>
     } else {
@@ -64,7 +64,7 @@ export default class ViewDiscussion extends Component {
       return <div>
                <p>you are viewing the {this.props.params.id} discussion</p>
                <form>
-                 <CommentForm handleCommentChange={this.handleCommentChange} handleSubmit={this.handleSubmit}/>;
+                 <CommentForm handleCommentChange={this.handleCommentChange} handleSubmit={this.handleSaveNewComment}/>;
                </form>
                {commentList}
              </div>
@@ -73,11 +73,10 @@ export default class ViewDiscussion extends Component {
 
   handleCommentChange(event) {this.setState({content: event.target.value})}
 
-  handleAddNewComment(event) {this.setState({addingNewComment: true})}
+  handleClickReply(event) {this.setState({addingNewComment: true})}
 
-  handleSubmit(event) {
+  handleSaveNewComment(event) {
     console.log('A comment was submitted by: ' + localStorage.getItem('username'));
-
     createComment(this, this.state, this.state.comment, this.props.params.id);
   }
 
