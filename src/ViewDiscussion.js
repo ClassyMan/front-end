@@ -47,25 +47,26 @@ export default class ViewDiscussion extends Component {
       })
     }</div>;
 
+    let discussionHeader = <Panel>
+                             <Panel.Heading>
+                               <Panel.Title>{this.state.title} : {this.props.params.id}</Panel.Title>
+                             </Panel.Heading>
+                             <Panel.Body>{this.state.summary}</Panel.Body>
+                           </Panel>;
+
     if (!this.state.addingNewComment) {
       return <div>
                <Button><Link to="/">Home</Link></Button>
-               <Panel>
-                 <Panel.Heading>
-                   <Panel.Title>{this.state.title} : {this.props.params.id}</Panel.Title>
-                 </Panel.Heading>
-                   <Panel.Body>{this.state.summary}</Panel.Body>
-               </Panel>
+               {discussionHeader}
                <Button onClick={this.handleClickReply}>Reply</Button>
                {commentList}
              </div>
     } else {
 
       return <div>
-               <p>you are viewing the {this.props.params.id} discussion</p>
-               <form>
-                 <CommentForm handleCommentChange={this.handleCommentChange} handleSubmit={this.handleSaveNewComment}/>;
-               </form>
+               <Button><Link to="/">Home</Link></Button>
+               {discussionHeader}
+               <CommentForm handleCommentChange={this.handleCommentChange} handleSubmit={this.handleSaveNewComment}/>;
                {commentList}
              </div>
     }
