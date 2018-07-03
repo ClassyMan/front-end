@@ -3,7 +3,7 @@ import { Button, Panel } from 'react-bootstrap';
 import CommentForm from './CommentForm.js';
 import PropTypes from 'prop-types';
 import {headerSettings} from './HttpSettings.js';
-import { createComment } from './CommentService.js';
+import { createComment } from './CommentLoader.js';
 
 /*
  * Component for viewing and discussing a single discussion
