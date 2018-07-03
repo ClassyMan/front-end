@@ -5,7 +5,7 @@ import Comment from './Comment.js';
 import { Link } from 'react-router';
 import CommentForm from './CommentForm.js';
 import autobind from 'autobind-decorator';
-import { createComment } from './CommentLoader.js';
+import { createComment } from './CommentSaver.js';
 
 /*
  * Component for viewing and discussing a single discussion
