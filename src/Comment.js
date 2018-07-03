@@ -31,7 +31,6 @@ class Comment extends Component {
       footer = <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>;
     }
 
-
     let commentList = <ul>{
       this.state.comments
           .sort((a, b) => a.createdTime < b.createdTime)
@@ -55,23 +54,25 @@ class Comment extends Component {
   handleSubmit(event) {
     console.log('A comment was submitted by: ' + localStorage.getItem('username'));
     console.log('In discussion: ' + this.props.discussionId);
-    let updatedParents = this.props.comment.parentIds;
+    let updatedParents = this.props.comment.parentIds.slice(0);
+    console.log(updatedParents);
     if (this.props.comment.id) {
       updatedParents.push(this.props.comment.id);
     }
+    console.log(updatedParents);
 
     console.log('Parent ids: ' + this.props.parentIds);
-
+    let newComment = {
+      discussionId: this.props.discussionId,
+      username: localStorage.getItem('username'),
+      content: this.state.content,
+      parentIds: updatedParents,
+      childeren: []
+    };
     fetch('http://localhost:8080/comments/add', {
       method: 'POST',
       headers: headerSettings,
-      body: JSON.stringify({
-        discussionId: this.props.discussionId,
-        username: localStorage.getItem('username'),
-        content: this.state.content,
-        parentIds: updatedParents,
-        childeren: []
-      })
+      body: JSON.stringify(newComment)
     }).then((res) => {
       return res.text();
     }).then((text) => {
