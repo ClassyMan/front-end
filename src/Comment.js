@@ -15,7 +15,7 @@ class Comment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      comments: [],
+      comments: this.props.comment.childeren,
       addingNewComment: false,
       content: ''
     };
@@ -33,7 +33,7 @@ class Comment extends Component {
 
 
     let commentList = <ul>{
-      this.props.comment.childeren
+      this.state.comments
           .sort((a, b) => a.createdTime < b.createdTime)
           .map(comment => {
             return <li key={comment.id}><Comment key={comment.id} comment={comment} discussionId={this.props.discussionId}/></li>
@@ -55,25 +55,29 @@ class Comment extends Component {
   handleSubmit(event) {
     console.log('A comment was submitted by: ' + localStorage.getItem('username'));
     console.log('In discussion: ' + this.props.discussionId);
-    console.log('Parent id: ' + this.props.parentId);
-
     let updatedParents = this.props.comment.parentIds;
     if (this.props.comment.id) {
       updatedParents.push(this.props.comment.id);
     }
+
+    console.log('Parent ids: ' + this.props.parentIds);
 
     fetch('http://localhost:8080/comments/add', {
       method: 'POST',
       headers: headerSettings,
       body: JSON.stringify({
         discussionId: this.props.discussionId,
-        username: this.props.comment.username,
+        username: localStorage.getItem('username'),
         content: this.state.content,
         parentIds: updatedParents,
         childeren: []
       })
     }).then((res) => {
-      this.setState({addingNewComment: false});
+      return res.text();
+    }).then((text) => {
+      var retreived = text.length ? JSON.parse(text) : {};
+      this.setState({addingNewComment: false,
+                     comments: [retreived].concat(this.state.comments)});
     });
   }
 
