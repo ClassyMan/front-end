@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Panel, Button} from 'react-bootstrap';
-import {headerSettings} from './HttpSettings.js';
+import { Panel, Button } from 'react-bootstrap';
+import { headerSettings } from './HttpSettings.js';
 import Comment from './Comment.js';
 import { Link } from 'react-router';
 import CommentForm from './CommentForm.js';
 import autobind from 'autobind-decorator';
+import { createComment } from './CommentService.js';
 
 /*
  * Component for viewing and discussing a single discussion
@@ -78,30 +79,7 @@ export default class ViewDiscussion extends Component {
     console.log('In discussion: ' + this.props.discussionId);
     console.log('Parent id: ' + this.props.parentId);
 
-    let updatedParents = this.state.comment.parentIds.slice(0);
-    if (this.state.comment.id) {
-      updatedParents.push(this.state.comment.id);
-    }
-
-    let newComment = {
-      discussionId: this.props.params.id,
-      username: localStorage.getItem('username'),
-      content: this.state.content,
-      parentIds: updatedParents,
-      childeren: []
-    }
-
-    fetch('http://localhost:8080/comments/add', {
-      method: 'POST',
-      headers: headerSettings,
-      body: JSON.stringify(newComment)
-    }).then((res) => {
-      return res.text();
-    }).then((text) => {
-      var retreived = text.length ? JSON.parse(text) : {};
-      this.setState({addingNewComment: false,
-                     comments: [retreived].concat(this.state.comments)});
-    });
+    createComment(this, this.state, this.state.comment, this.props.params.id);
   }
 
   componentDidMount() {
