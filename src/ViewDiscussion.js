@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import CommentForm from './CommentForm.js';
 import autobind from 'autobind-decorator';
 import { createComment } from './CommentSaver.js';
+import { loadAllCommentsForDiscussion } from './CommentLoader.js';
 
 /*
  * Component for viewing and discussing a single discussion
@@ -88,26 +89,27 @@ export default class ViewDiscussion extends Component {
   }
 
   loadPagedComments() {
-    console.log('Loading comments for discussion: ' + this.props.params.id);
-    fetch('http://localhost:8080/comments/fetchCommentsForDiscussion', {
-        method: 'POST',
-        headers: headerSettings,
-        body: JSON.stringify({
-          discussionId: this.props.params.id
-        })
-      }
-    )
-    .then((res) => {
-       console.log('response received');
-       var text = res.text();
-       console.log('result: ' + text);
-       return text;
-    })
-    .then((text) => {
-       console.log('parsing json: ' + text);
-       var retreived = text.length ? JSON.parse(text) : {};
-       this.setState({comments: retreived})
-    });
+    loadAllCommentsForDiscussion(this, this.props.params.id);
+    // console.log('Loading comments for discussion: ' + this.props.params.id);
+    // fetch('http://localhost:8080/comments/fetchCommentsForDiscussion', {
+    //     method: 'POST',
+    //     headers: headerSettings,
+    //     body: JSON.stringify({
+    //       discussionId: this.props.params.id
+    //     })
+    //   }
+    // )
+    // .then((res) => {
+    //    console.log('response received');
+    //    var text = res.text();
+    //    console.log('result: ' + text);
+    //    return text;
+    // })
+    // .then((text) => {
+    //    console.log('parsing json: ' + text);
+    //    var retreived = text.length ? JSON.parse(text) : {};
+    //    this.setState({comments: retreived})
+    // });
 
     fetch('http://localhost:8080/discussions/fetchDiscussionById', {
         method: 'POST',
