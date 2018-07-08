@@ -36,7 +36,6 @@ export default class ViewDiscussion extends Component {
   }
 
   render() {
-
     let commentList = <div>{
       this.state.comments
       .sort((a, b) => a.createdTime < b.createdTime)
