@@ -18,18 +18,27 @@ class Comment extends Component {
     this.state = {
       comments: this.props.comment.childeren,
       addingNewComment: false,
+      editingComment: false,
       content: ''
     };
     this.handleCommentChange=this.handleCommentChange.bind(this);
     this.handleSubmit=this.handleSubmit.bind(this);
+    this.handleEditComment=this.handleEditComment.bind(this);
   }
 
   render() {
     let footer;
     if (this.state.addingNewComment === true) {
       footer = <CommentForm comment={this.props.comment} handleCommentChange={this.handleCommentChange} handleSubmit={this.handleSubmit} discussionId={this.props.discussionId}/>;
+    } else if (localStorage.getItem('username') === this.props.comment.username) {
+      footer = <div>
+                 <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>
+                 <Button onClick={this.handleEditComment.bind(this)}>Edit</Button>
+               </div>;
     } else {
-      footer = <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>;
+      footer = <div>
+                 <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>
+               </div>;
     }
 
     let commentList = <ul>{
@@ -58,6 +67,8 @@ class Comment extends Component {
 
     createComment(this, this.state, this.props.comment, this.props.discussionId);
   }
+
+  handleEditComment(event) {this.setState({editingComment: true});}
 
   handleAddNewComment(event) {this.setState({addingNewComment: true});}
 }
