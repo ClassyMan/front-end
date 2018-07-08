@@ -27,6 +27,7 @@ import {headerSettings} from './HttpSettings.js';
       var retreived = text.length ? JSON.parse(text) : {};
       component.setState({addingNewComment: false,
                           comments: [retreived].concat(state.comments)});
+      comment.childeren = [retreived].concat(state.comments);
     });
   }
 
