@@ -33,6 +33,7 @@ export default class ViewDiscussion extends Component {
     this.handleClickReply=this.handleClickReply.bind(this);
     this.handleCommentChange=this.handleCommentChange.bind(this);
     this.handleSaveNewComment=this.handleSaveNewComment.bind(this);
+    this.handleDelete=this.handleDelete.bind(this);
   }
 
   render() {
@@ -40,7 +41,7 @@ export default class ViewDiscussion extends Component {
       this.state.comments
       .sort((a, b) => a.createdTime < b.createdTime)
       .map(comment => {
-        return <Comment key={comment.id} comment={comment} discussionId={this.props.params.id}/>
+        return <Comment key={comment.id} handleDelete={this.handleCommentDeleted} comment={comment} discussionId={this.props.params.id}/>
       })
     }</div>;
 
@@ -59,7 +60,6 @@ export default class ViewDiscussion extends Component {
                {commentList}
              </div>
     } else {
-
       return <div>
                <Button><Link to="/">Home</Link></Button>
                {discussionHeader}
@@ -70,6 +70,10 @@ export default class ViewDiscussion extends Component {
   }
 
   handleCommentChange(event) {this.setState({content: event.target.value})}
+
+  handleDelete(comment) {
+
+  }
 
   handleClickReply(event) {this.setState({addingNewComment: true})}
 

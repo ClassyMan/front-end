@@ -18,12 +18,14 @@ class Comment extends Component {
       comments: this.props.comment.childeren,
       addingNewComment: false,
       editingComment: false,
+      isDeleted: false,
       content: ''
     };
     this.handleCommentChange=this.handleCommentChange.bind(this);
     this.handleSubmit=this.handleSubmit.bind(this);
     this.handleEditComment=this.handleEditComment.bind(this);
     this.handleDeleteComment=this.handleDeleteComment.bind(this);
+    this.handleDelete=this.handleDelete.bind(this);
   }
 
   render() {
@@ -46,13 +48,22 @@ class Comment extends Component {
       this.state.comments
           .sort((a, b) => a.createdTime < b.createdTime)
           .map(comment => {
-            return <li key={comment.id}><Comment key={comment.id} comment={comment} discussionId={this.props.discussionId}/></li>
+            return <li key={comment.id}><Comment key={comment.id} handleDelete={this.handleDelete} comment={comment} discussionId={this.props.discussionId}/></li>
           })
     }</ul>;
 
     let actualComment;
     if (this.state.editingComment) {
       actualComment = <CommentForm comment={this.props.comment} editExisting={true} handleCommentChange={this.handleCommentChange} handleSubmit={this.handleSubmit} discussionId={this.props.discussionId}/>;
+    } else if (this.state.isDeleted) {
+      actualComment = <div>
+                        <Panel>
+                          <Panel.Heading>[DELETED]</Panel.Heading>
+                          <Panel.Body>[DELETED]</Panel.Body>
+                          {footer}
+                          {commentList}
+                        </Panel>
+                      </div>;
     } else {
       actualComment = <div>
                         <Panel>
@@ -81,7 +92,23 @@ class Comment extends Component {
 
   handleEditComment(event) {this.setState({editingComment: true});}
   handleAddNewComment(event) {this.setState({addingNewComment: true});}
-  handleDeleteComment(event){deleteComment(this, this.state, this.props.comment, this.props.discussionId);}
+
+  handleDeleteComment(event){
+    deleteComment(this, this.state, this.props.comment, this.props.discussionId);
+    this.props.handleDelete(this.props.comment);
+  }
+
+  handleDelete(comment) {
+    console.log('delete comment');
+    if (comment.childeren.length > 0) {
+      console.log('fake delete comment');
+    } else {
+      console.log('real delete comment');
+      this.setState({comments: this.state.comments.filter(function(each) {
+          return each !== comment
+      })});
+    }
+  }
 }
 
 Comment.propTypes = {
