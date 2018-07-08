@@ -63,7 +63,6 @@ class Comment extends Component {
                       </div>;
     }
 
-
     return actualComment;
   }
 

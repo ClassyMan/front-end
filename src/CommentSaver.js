@@ -27,8 +27,12 @@ import {headerSettings} from './HttpSettings.js';
     });
   }
 
+  /*
+   * Update a comment via Http request
+   */
   export function updateComment(component, state, comment, discussionId) {
 
+    comment.content = state.content;
     fetch('http://localhost:8080/comments/update', {
       method: 'POST',
       headers: headerSettings,
@@ -37,7 +41,6 @@ import {headerSettings} from './HttpSettings.js';
       return res.text();
     }).then((text) => {
       var retreived = text.length ? JSON.parse(text) : {};
-      component.setState({editingComment: false,
-                          comments: [retreived].concat(state.comments)});
+      component.setState({editingComment: false});
     });
   }
