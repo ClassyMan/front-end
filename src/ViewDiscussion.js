@@ -41,7 +41,7 @@ export default class ViewDiscussion extends Component {
       this.state.comments
       .sort((a, b) => a.createdTime < b.createdTime)
       .map(comment => {
-        return <Comment key={comment.id} handleDelete={this.handleCommentDeleted} comment={comment} discussionId={this.props.params.id}/>
+        return <Comment key={comment.id} handleDelete={this.handleDelete} comment={comment} discussionId={this.props.params.id}/>
       })
     }</div>;
 
@@ -72,7 +72,15 @@ export default class ViewDiscussion extends Component {
   handleCommentChange(event) {this.setState({content: event.target.value})}
 
   handleDelete(comment) {
-
+    console.log('delete comment');
+    if (comment.childeren.length > 0) {
+      console.log('fake delete comment');
+    } else {
+      console.log('real delete comment');
+      this.setState({comments: this.state.comments.filter(function(each) {
+          return each !== comment
+      })});
+    }
   }
 
   handleClickReply(event) {this.setState({addingNewComment: true})}
