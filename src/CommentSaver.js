@@ -1,5 +1,8 @@
 import {headerSettings} from './HttpSettings.js';
 
+  /*
+   * Save a comment via http request
+   */
   export function createComment(component, state, comment, discussionId) {
     let updatedParents = comment.parentIds.slice(0);
     if (comment.id) {
