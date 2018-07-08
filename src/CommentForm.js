@@ -41,7 +41,7 @@ class CommentForm extends Component {
   render() {
     let value;
     if (this.props.editExisting) {
-      value = this.props.comment.content;
+      value = this.props.comment.content.slice(0);
     } else {
       value = null;
     }
@@ -49,7 +49,7 @@ class CommentForm extends Component {
              <label>Reply</label><br/>
              <Label type="text" value={this.props.username}/>
              <br/>
-             <FormControl value={value} componentClass="textarea" onChange={this.props.handleCommentChange} placeholder="Reply to OP, be nice..."/>
+             <FormControl defaultValue={value} componentClass="textarea" onChange={this.props.handleCommentChange} placeholder="Reply to OP, be nice..."/>
              <br/>
              <Button type="submit" onClick={this.props.handleSubmit}>Submit</Button>
            </FormGroup>
