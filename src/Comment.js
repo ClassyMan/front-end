@@ -49,14 +49,16 @@ class Comment extends Component {
           })
     }</ul>;
 
-    return <div>
-             <Panel>
-               <Panel.Heading>{this.props.comment.username}</Panel.Heading>
-               <Panel.Body>{this.props.comment.content}</Panel.Body>
-               {footer}
-               {commentList}
-             </Panel>
-           </div>
+    let actualComment = <div>
+                          <Panel>
+                            <Panel.Heading>{this.props.comment.username}</Panel.Heading>
+                            <Panel.Body>{this.props.comment.content}</Panel.Body>
+                            {footer}
+                            {commentList}
+                          </Panel>
+                        </div>;
+
+    return actualComment;
   }
 
   handleCommentChange(event) {this.setState({content: event.target.value})}
