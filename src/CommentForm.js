@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Label, Button, FormGroup, FormControl } from 'react-bootstrap';
-import {headerSettings} from './HttpSettings.js';
-import Comment from './Comment.js';
-import PropTypes from 'prop-types';
 
 /*
  * Component for viewing and discussing a single discussion

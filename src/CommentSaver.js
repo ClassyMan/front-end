@@ -38,9 +38,6 @@ import {headerSettings} from './HttpSettings.js';
       headers: headerSettings,
       body: JSON.stringify(comment)
     }).then((res) => {
-      return res.text();
-    }).then((text) => {
-      var retreived = text.length ? JSON.parse(text) : {};
       component.setState({editingComment: false});
     });
   }

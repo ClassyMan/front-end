@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Panel, Button } from 'react-bootstrap';
-import { headerSettings } from './HttpSettings.js';
 import Comment from './Comment.js';
 import { Link } from 'react-router';
 import CommentForm from './CommentForm.js';
-import autobind from 'autobind-decorator';
 import { createComment } from './CommentSaver.js';
 import { loadAllCommentsForDiscussion, loadDiscussion } from './CommentLoader.js';
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, Panel } from 'react-bootstrap';
 import CommentForm from './CommentForm.js';
 import PropTypes from 'prop-types';
-import {headerSettings} from './HttpSettings.js';
 import { createComment, updateComment } from './CommentSaver.js';
 
 /*
