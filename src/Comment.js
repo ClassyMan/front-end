@@ -3,7 +3,7 @@ import { Button, Panel } from 'react-bootstrap';
 import CommentForm from './CommentForm.js';
 import PropTypes from 'prop-types';
 import {headerSettings} from './HttpSettings.js';
-import { createComment } from './CommentSaver.js';
+import { createComment, updateComment } from './CommentSaver.js';
 
 /*
  * Component for viewing and discussing a single discussion
@@ -72,8 +72,11 @@ class Comment extends Component {
   handleSubmit(event) {
     console.log('A comment was submitted by: ' + localStorage.getItem('username'));
     console.log('In discussion: ' + this.props.discussionId);
-
-    createComment(this, this.state, this.props.comment, this.props.discussionId);
+    if (this.state.editingComment) {
+      updateComment(this, this.state, this.props.comment, this.props.discussionId);
+    } else {
+      createComment(this, this.state, this.props.comment, this.props.discussionId);
+    }
   }
 
   handleEditComment(event) {this.setState({editingComment: true});}
