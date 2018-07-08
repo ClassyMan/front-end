@@ -44,3 +44,18 @@ import {headerSettings} from './HttpSettings.js';
       component.setState({editingComment: false});
     });
   }
+
+  /*
+   * Update a comment via Http request
+   */
+  export function deleteComment(component, state, comment, discussionId) {
+
+    comment.content = state.content;
+    fetch('http://localhost:8080/comments/delete', {
+      method: 'POST',
+      headers: headerSettings,
+      body: JSON.stringify(comment)
+    }).then((res) => {
+      component.setState({editingComment: false});
+    });
+  }

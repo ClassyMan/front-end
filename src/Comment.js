@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Panel } from 'react-bootstrap';
 import CommentForm from './CommentForm.js';
 import PropTypes from 'prop-types';
-import { createComment, updateComment } from './CommentSaver.js';
+import { createComment, updateComment, deleteComment } from './CommentSaver.js';
 
 /*
  * Component for viewing and discussing a single discussion
@@ -23,6 +23,7 @@ class Comment extends Component {
     this.handleCommentChange=this.handleCommentChange.bind(this);
     this.handleSubmit=this.handleSubmit.bind(this);
     this.handleEditComment=this.handleEditComment.bind(this);
+    this.handleDeleteComment=this.handleDeleteComment.bind(this);
   }
 
   render() {
@@ -33,6 +34,7 @@ class Comment extends Component {
       footer = <div>
                  <Button onClick={this.handleAddNewComment.bind(this)}>Reply</Button>
                  <Button onClick={this.handleEditComment.bind(this)}>Edit</Button>
+                 <Button onClick={this.handleDeleteComment.bind(this)}>Delete</Button>
                </div>;
     } else {
       footer = <div>
@@ -78,8 +80,8 @@ class Comment extends Component {
   }
 
   handleEditComment(event) {this.setState({editingComment: true});}
-
   handleAddNewComment(event) {this.setState({addingNewComment: true});}
+  handleDeleteComment(event){deleteComment(this, this.state, this.props.comment, this.props.discussionId);}
 }
 
 Comment.propTypes = {
