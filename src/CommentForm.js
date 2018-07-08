@@ -39,21 +39,17 @@ class CommentForm extends Component {
   }
 
   render() {
-    // const errors = this.validate(this.state);
-    // const isEnabled = !Object.keys(errors).some(x => errors[x]);
-    //
-    // const shouldMarkError = (field) => {
-    //   const hasError = errors[field];
-    //   const shouldShow = this.state.touched[field];
-    //   return hasError ? shouldShow : false;
-    // };
-    // //className={shouldMarkError('content') ? "error" : ""}
-    // //onBlur={this.handleBlur('content')}
+    let value;
+    if (this.props.editExisting) {
+      value = this.props.comment.content;
+    } else {
+      value = null;
+    }
     return <FormGroup>
              <label>Reply</label><br/>
              <Label type="text" value={this.props.username}/>
              <br/>
-             <FormControl componentClass="textarea" onChange={this.props.handleCommentChange} placeholder="Reply to OP, be nice..."/>
+             <FormControl value={value} componentClass="textarea" onChange={this.props.handleCommentChange} placeholder="Reply to OP, be nice..."/>
              <br/>
              <Button type="submit" onClick={this.props.handleSubmit}>Submit</Button>
            </FormGroup>

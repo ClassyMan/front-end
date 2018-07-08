@@ -49,14 +49,20 @@ class Comment extends Component {
           })
     }</ul>;
 
-    let actualComment = <div>
-                          <Panel>
-                            <Panel.Heading>{this.props.comment.username}</Panel.Heading>
-                            <Panel.Body>{this.props.comment.content}</Panel.Body>
-                            {footer}
-                            {commentList}
-                          </Panel>
-                        </div>;
+    let actualComment;
+    if (this.state.editingComment) {
+      actualComment = <CommentForm comment={this.props.comment} editExisting={true} handleCommentChange={this.handleCommentChange} handleSubmit={this.handleSubmit} discussionId={this.props.discussionId}/>;
+    } else {
+      actualComment = <div>
+                        <Panel>
+                          <Panel.Heading>{this.props.comment.username}</Panel.Heading>
+                          <Panel.Body>{this.props.comment.content}</Panel.Body>
+                          {footer}
+                          {commentList}
+                        </Panel>
+                      </div>;
+    }
+
 
     return actualComment;
   }
