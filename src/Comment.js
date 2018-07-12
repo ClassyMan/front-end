@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Panel } from 'react-bootstrap';
+import { Button, Panel, Image } from 'react-bootstrap';
 import CommentForm from './CommentForm.js';
 import PropTypes from 'prop-types';
 import { createComment, updateComment, deleteComment } from './CommentSaver.js';
@@ -67,7 +67,13 @@ class Comment extends Component {
     } else {
       actualComment = <div>
                         <Panel>
-                          <Panel.Heading>{this.props.comment.username}</Panel.Heading>
+                          <Panel.Heading>
+                            <div>
+                              <Button><Image src={require('./images/material-design-icons-master/navigation/1x_web/ic_arrow_upward_black_18dp.png')} alt="arrow" /></Button>
+                              <Button><Image src={require('./images/material-design-icons-master/navigation/1x_web/ic_arrow_downward_black_18dp.png')} alt="arrow" /></Button>
+                              {this.props.comment.username}
+                            </div>
+                          </Panel.Heading>
                           <Panel.Body>{this.props.comment.content}</Panel.Body>
                           {footer}
                           {commentList}
