@@ -18,9 +18,8 @@ import {headerSettings} from './HttpSettings.js';
     }).then((res) => {
       return res.text();
     }).then((text) => {
-      // var retreived = text.length ? JSON.parse(text) : {};
-      //component.setState({});
-      // comment.childeren = [retreived].concat(state.comments);
+       var retreived = text.length ? JSON.parse(text) : {};
+       component.setState({votes: retreived});
     });
   }
 

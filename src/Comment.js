@@ -20,7 +20,7 @@ class Comment extends Component {
       editingComment: false,
       isDeleted: false,
       content: '',
-      votes: ''
+      votes: this.props.comment.votes
     };
     this.handleCommentChange=this.handleCommentChange.bind(this);
     this.handleSubmit=this.handleSubmit.bind(this);
@@ -72,7 +72,7 @@ class Comment extends Component {
                         <Panel>
                           <Panel.Heading>
                             <div>
-                              {this.props.comment.votes}
+                              {this.state.votes}
                               <Button><Image src={require('./images/material-design-icons-master/navigation/1x_web/ic_arrow_upward_black_18dp.png')} onClick={this.upvote} alt="arrow" /></Button>
                               <Button><Image src={require('./images/material-design-icons-master/navigation/1x_web/ic_arrow_downward_black_18dp.png')} onClick={this.downvote} alt="arrow" /></Button>
                               {this.props.comment.username}
@@ -91,15 +91,11 @@ class Comment extends Component {
   upvote(event) {
     console.log('upvote');
     vote(this, this.state, this.props.comment,  1);
-    let newVotes = this.state.votes + 1;
-    this.setState({votes: newVotes});
   }
 
   downvote(event) {
     console.log('downvote');
     vote(this, this.state, this.props.comment, -1);
-    let newVotes = this.state.votes - 1;
-    this.setState({votes: newVotes});
   }
 
   handleCommentChange(event) {this.setState({content: event.target.value})}
