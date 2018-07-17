@@ -1,6 +1,6 @@
 import {headerSettings} from './HttpSettings.js';
 
-  export function vote(component, state, comment, polarity) {
+  export function vote(component, state, comment, discussionId, polarity) {
     fetch('http://localhost:8080/votes/add', {
       method: 'POST',
       headers: headerSettings,
@@ -9,6 +9,7 @@ import {headerSettings} from './HttpSettings.js';
                               vote: {
                                      username: localStorage.getItem('username'),
                                      commentId: comment.id,
+                                     discussionId: discussionId,
                                      polarity: polarity
                                     },
                               comment: comment

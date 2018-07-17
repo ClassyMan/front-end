@@ -90,12 +90,12 @@ class Comment extends Component {
 
   upvote(event) {
     console.log('upvote');
-    vote(this, this.state, this.props.comment,  1);
+    vote(this, this.state, this.props.comment, this.props.discussionId, 1);
   }
 
   downvote(event) {
     console.log('downvote');
-    vote(this, this.state, this.props.comment, -1);
+    vote(this, this.state, this.props.comment, this.props.discussionId, -1);
   }
 
   handleCommentChange(event) {this.setState({content: event.target.value})}
