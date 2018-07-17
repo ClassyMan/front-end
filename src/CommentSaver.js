@@ -1,5 +1,29 @@
 import {headerSettings} from './HttpSettings.js';
 
+  export function vote(component, state, comment, polarity) {
+    fetch('http://localhost:8080/votes/add', {
+      method: 'POST',
+      headers: headerSettings,
+      body: JSON.stringify(
+                            {
+                              vote: {
+                                     username: localStorage.getItem('username'),
+                                     commentId: comment.id,
+                                     polarity: polarity
+                                    },
+                              comment: comment
+                            }
+                          )
+
+    }).then((res) => {
+      return res.text();
+    }).then((text) => {
+      // var retreived = text.length ? JSON.parse(text) : {};
+      //component.setState({});
+      // comment.childeren = [retreived].concat(state.comments);
+    });
+  }
+
   /*
    * Save a comment via http request
    */

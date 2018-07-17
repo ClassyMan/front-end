@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Panel, Image } from 'react-bootstrap';
 import CommentForm from './CommentForm.js';
 import PropTypes from 'prop-types';
-import { createComment, updateComment, deleteComment } from './CommentSaver.js';
+import { createComment, updateComment, deleteComment, vote } from './CommentSaver.js';
 
 /*
  * Component for viewing and discussing a single discussion
@@ -19,13 +19,16 @@ class Comment extends Component {
       addingNewComment: false,
       editingComment: false,
       isDeleted: false,
-      content: ''
+      content: '',
+      votes: ''
     };
     this.handleCommentChange=this.handleCommentChange.bind(this);
     this.handleSubmit=this.handleSubmit.bind(this);
     this.handleEditComment=this.handleEditComment.bind(this);
     this.handleDeleteComment=this.handleDeleteComment.bind(this);
     this.handleDelete=this.handleDelete.bind(this);
+    this.upvote=this.upvote.bind(this);
+    this.downvote=this.downvote.bind(this);
   }
 
   render() {
@@ -69,8 +72,9 @@ class Comment extends Component {
                         <Panel>
                           <Panel.Heading>
                             <div>
-                              <Button><Image src={require('./images/material-design-icons-master/navigation/1x_web/ic_arrow_upward_black_18dp.png')} alt="arrow" /></Button>
-                              <Button><Image src={require('./images/material-design-icons-master/navigation/1x_web/ic_arrow_downward_black_18dp.png')} alt="arrow" /></Button>
+                              {this.props.comment.votes}
+                              <Button><Image src={require('./images/material-design-icons-master/navigation/1x_web/ic_arrow_upward_black_18dp.png')} onClick={this.upvote} alt="arrow" /></Button>
+                              <Button><Image src={require('./images/material-design-icons-master/navigation/1x_web/ic_arrow_downward_black_18dp.png')} onClick={this.downvote} alt="arrow" /></Button>
                               {this.props.comment.username}
                             </div>
                           </Panel.Heading>
@@ -82,6 +86,20 @@ class Comment extends Component {
     }
 
     return actualComment;
+  }
+
+  upvote(event) {
+    console.log('upvote');
+    vote(this, this.state, this.props.comment,  1);
+    let newVotes = this.state.votes + 1;
+    this.setState({votes: newVotes});
+  }
+
+  downvote(event) {
+    console.log('downvote');
+    vote(this, this.state, this.props.comment, -1);
+    let newVotes = this.state.votes - 1;
+    this.setState({votes: newVotes});
   }
 
   handleCommentChange(event) {this.setState({content: event.target.value})}
