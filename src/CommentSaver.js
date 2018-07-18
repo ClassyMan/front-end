@@ -1,7 +1,7 @@
 import {headerSettings} from './HttpSettings.js';
 
   export function vote(component, state, comment, discussionId, polarity) {
-    fetch('http://localhost:8080/votes/add', {
+    fetch('http://localhost:8080/comments/vote', {
       method: 'POST',
       headers: headerSettings,
       body: JSON.stringify(

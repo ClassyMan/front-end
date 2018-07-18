@@ -4,7 +4,7 @@ import Comment from './Comment.js';
 import { Link } from 'react-router';
 import CommentForm from './CommentForm.js';
 import { createComment } from './CommentSaver.js';
-import { loadAllCommentsForDiscussion, loadDiscussion } from './CommentLoader.js';
+import { loadCommentsForDiscussionUsingUser, loadDiscussion } from './CommentLoader.js';
 
 /*
  * Component for viewing and discussing a single discussion
@@ -92,7 +92,7 @@ export default class ViewDiscussion extends Component {
 
   componentDidMount() {
     this.setState({username: localStorage.getItem('username')});
-    loadAllCommentsForDiscussion(this, this.props.params.id);
+    loadCommentsForDiscussionUsingUser(this, this.props.params.id, localStorage.getItem('username'));
     loadDiscussion(this, this.props.params.id);
   }
 }

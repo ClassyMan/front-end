@@ -20,7 +20,8 @@ class Comment extends Component {
       editingComment: false,
       isDeleted: false,
       content: '',
-      votes: this.props.comment.votes
+      votes: this.props.comment.votes,
+      votesFromCurrentUser: this.props.comment.votesFromCurrentUser
     };
     this.handleCommentChange=this.handleCommentChange.bind(this);
     this.handleSubmit=this.handleSubmit.bind(this);
@@ -68,11 +69,18 @@ class Comment extends Component {
                         </Panel>
                       </div>;
     } else {
+      let voteInfo;
+      if (this.state.votesFromCurrentUser!=0) {
+        voteInfo = <div>{this.state.votes} : {this.state.votesFromCurrentUser}</div>
+      } else {
+        voteInfo = this.state.votes;
+      }
+
       actualComment = <div>
                         <Panel>
                           <Panel.Heading>
                             <div>
-                              {this.state.votes}
+                              {voteInfo}
                               <Button><Image src={require('./images/material-design-icons-master/navigation/1x_web/ic_arrow_upward_black_18dp.png')} onClick={this.upvote} alt="arrow" /></Button>
                               <Button><Image src={require('./images/material-design-icons-master/navigation/1x_web/ic_arrow_downward_black_18dp.png')} onClick={this.downvote} alt="arrow" /></Button>
                               {this.props.comment.username}
