@@ -70,7 +70,7 @@ class Comment extends Component {
                       </div>;
     } else {
       let voteInfo;
-      if (this.state.votesFromCurrentUser!=0) {
+      if (this.state.votesFromCurrentUser != null) {
         voteInfo = <div>{this.state.votes} : {this.state.votesFromCurrentUser}</div>
       } else {
         voteInfo = this.state.votes;
@@ -99,11 +99,13 @@ class Comment extends Component {
   upvote(event) {
     console.log('upvote');
     vote(this, this.state, this.props.comment, this.props.discussionId, 1);
+    this.setState({votesFromCurrentUser: 1});
   }
 
   downvote(event) {
     console.log('downvote');
     vote(this, this.state, this.props.comment, this.props.discussionId, -1);
+    this.setState({votesFromCurrentUser: -1}); 
   }
 
   handleCommentChange(event) {this.setState({content: event.target.value})}
